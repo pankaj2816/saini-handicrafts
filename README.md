@@ -15,6 +15,10 @@ npm install
 npm run dev
 ```
 
+## Live Demo
+
+https://pankaj2816.github.io/saini-handicrafts/
+
 ## Current Features
 
 - Creative handmade storefront homepage
