@@ -191,7 +191,7 @@ function App() {
   const [checkoutData, setCheckoutData] = useState({
     name: 'Pankaj Saini',
     phone: '+91 98765 43210',
-    address: 'Artisan Workshop, Civil Lines, Jaipur, Rajasthan - 302006',
+    address: 'Artisan Workshop, Rajasthan, India - 302006',
     paymentMethod: 'Cash on Delivery (COD)'
   });
 
@@ -268,7 +268,7 @@ function App() {
             <span className="logo-badge">SH</span>
             <div>
               <span className="logo-title">SAINI HANDICRAFTS</span>
-              <span className="logo-sub">Artisan Atelier • Jaipur</span>
+              <span className="logo-sub">Artisan Atelier • Rajasthan</span>
             </div>
           </a>
 
@@ -836,7 +836,7 @@ function App() {
 
           <div className="footer-col">
             <h4>Workshop & Inquiries</h4>
-            <p><MapPin size={15} /> Jaipur & Alwar, Rajasthan, India</p>
+            <p><MapPin size={15} /> Rajasthan, India</p>
             <p><Phone size={15} /> WhatsApp / Phone: +91 98765 43210</p>
             <p><Sparkles size={15} /> 100% Genuine Handmade Quality</p>
           </div>
