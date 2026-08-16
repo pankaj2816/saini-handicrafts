@@ -3,26 +3,37 @@ import { createRoot } from 'react-dom/client';
 import {
   ArrowRight,
   BadgeCheck,
-  ChevronLeft,
-  ChevronRight,
   CheckCircle,
+  Clock,
   CreditCard,
   Edit3,
+  ExternalLink,
+  Eye,
   FileText,
-  Gift,
   Heart,
   ImagePlus,
+  Info,
+  Lock,
   LogIn,
   LogOut,
+  MapPin,
   Menu,
+  MessageCircle,
   Minus,
-  PackageCheck,
+  Package,
+  Phone,
   Plus,
+  Printer,
+  RotateCcw,
   Save,
   Search,
+  Send,
+  Share2,
+  ShieldCheck,
   ShoppingBag,
   SlidersHorizontal,
   Sparkles,
+  Star,
   Trash2,
   Truck,
   User,
@@ -30,1525 +41,1076 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-const starterProducts = [
+const assetPath = (fileName) => `${import.meta.env.BASE_URL}assets/${fileName}`;
+
+const initialProducts = [
   {
-    id: 'terracotta-vase',
-    name: 'Terracotta Bloom Vase',
-    category: 'Ceramic Decor',
-    price: 1890,
-    tone: 'clay',
-    badge: 'Best seller',
+    id: 'kalpavriksha-mural',
+    name: 'Kalpavriksha Tree of Life Brass Mural',
+    category: 'Wall Decor',
+    price: 4890,
+    originalPrice: 5900,
+    badge: 'Bestseller',
     maker: 'Saini Handicrafts',
     stock: 'Ready to ship',
-    image: '/assets/product-ceramic.png',
-    mood: 'Warm Home',
-    material: 'Terracotta clay',
-    care: 'Wipe with a soft dry cloth. Keep away from standing water.',
-    story: 'Thrown slowly on the wheel, dried in shade, and finished with a soft floral rim for festive corners.',
-    description: 'Hand-thrown vase with soft matte glaze and floral rim work.'
+    image: assetPath('products/kalpavriksha-mural.jpg'),
+    material: 'Embossed Antique Brass Relief',
+    dimensions: '18" x 18" Plaque',
+    care: 'Dust gently with dry microfiber cloth. Avoid chemical liquids.',
+    story: 'Hand-beaten and embossed with the mythological wish-fulfilling Kalpavriksha banyan tree, showcasing intricate leaf patterns and cascading aerial roots finished in an antique bronze and gold luster.',
+    description: 'Antique gold bas-relief wall art plaque celebrating traditional Indian heritage motifs.'
   },
   {
-    id: 'indigo-runner',
-    name: 'Indigo Loom Runner',
-    category: 'Textile Art',
-    price: 2450,
-    tone: 'indigo',
-    badge: 'New',
+    id: 'live-edge-clock',
+    name: 'Rustic Live-Edge Teak Wall Clock',
+    category: 'Woodcraft',
+    price: 3450,
+    originalPrice: 4200,
+    badge: 'Masterpiece',
     maker: 'Saini Handicrafts',
-    stock: 'Made to order',
-    image: '/assets/product-textile.png',
-    mood: 'Festive Table',
-    material: 'Handwoven cotton',
-    care: 'Hand wash separately in cold water. Dry in shade.',
-    story: 'Dyed in deep indigo and block-printed in small runs, so every runner carries slight pattern variation.',
-    description: 'Natural cotton table runner with hand-blocked resist patterns.'
+    stock: '2 units available',
+    image: assetPath('products/live-edge-clock.jpg'),
+    material: 'Reclaimed Hardwood & Brass Hands',
+    dimensions: '16" x 12" x 1.5"',
+    care: 'Wipe with dry cloth. Polish with natural teak wax once a year.',
+    story: 'Chiseled out of a seasoned live-edge timber slab preserving the organic natural tree bark edge, sealed with natural oils to highlight golden knots, and fitted with vintage clock hands.',
+    description: 'Solid live-edge wooden clock with natural rustic bark perimeter and antique metal movement.'
   },
   {
-    id: 'neem-box',
-    name: 'Carved Neem Keepsake Box',
+    id: 'shahi-sawari-mural',
+    name: 'Royal Shahi Sawari Heritage Relief Plaque',
+    category: 'Wall Decor',
+    price: 5600,
+    originalPrice: 6800,
+    badge: 'Royal Heritage',
+    maker: 'Saini Handicrafts',
+    stock: 'Limited Edition',
+    image: assetPath('products/shahi-sawari-mural.jpg'),
+    material: 'Handcrafted Bas-Relief Metallic Panel',
+    dimensions: '24" x 11" Panoramic Plaque',
+    care: 'Clean with dry cloth. Indoor wall mounting recommended.',
+    story: 'Panoramic bas-relief panel depicting a regal Rajasthani procession with a ceremonial royal elephant carrying the king under the royal chhatri, escorted by torchbearers.',
+    description: 'Panoramic handcrafted bas-relief plaque capturing the grandeur of historic royal processions.'
+  },
+  {
+    id: 'buddha-bust-wall-art',
+    name: 'Serene Dhyana Buddha Wall Sculpture',
+    category: 'Sculptural Art',
+    price: 3200,
+    originalPrice: 3900,
+    badge: 'Spiritual Decor',
+    maker: 'Saini Handicrafts',
+    stock: 'Ready to ship',
+    image: assetPath('products/buddha-bust-wall-art.jpg'),
+    material: 'Cast Stone with Antique Patina',
+    dimensions: '15" x 9" x 4"',
+    care: 'Suitable for indoor and covered outdoor areas. Wipe clean.',
+    story: 'Sculpted with serene closed-eye meditative expression, classic ushnisha hair curls, and weathered antique bronze patina for meditation and living corners.',
+    description: 'Hand-finished Buddha bust relief wall sculpture designed for spiritual and tranquil living spaces.'
+  },
+  {
+    id: 'triptych-tree-panels',
+    name: 'Botanical Triptych Wall Panels (Set of 3)',
+    category: 'Wall Decor',
+    price: 3850,
+    originalPrice: 4800,
+    badge: 'Set of 3',
+    maker: 'Saini Handicrafts',
+    stock: 'Ready to ship',
+    image: assetPath('products/triptych-tree-panels.jpg'),
+    material: 'Embossed Antique Bronze & Frame',
+    dimensions: 'Set of three 8" x 12" panels',
+    care: 'Hang with attached brackets. Dust with dry cotton.',
+    story: 'A symmetrical trio of framed wall plaques featuring hand-embossed tropical palm and central banyan motifs surrounded by ornate beaded borders.',
+    description: 'Three-piece antique metallic wall art triptych featuring tropical and indigenous Indian tree silhouettes.'
+  },
+  {
+    id: 'tribal-totem-trio',
+    name: 'Tribal Heritage Totem Columns (Set of 3)',
+    category: 'Sculptural Art',
+    price: 2750,
+    originalPrice: 3500,
+    badge: 'Artisan Special',
+    maker: 'Saini Handicrafts',
+    stock: '4 sets available',
+    image: assetPath('products/tribal-totem-trio.jpg'),
+    material: 'Handcrafted Terracotta & Wood',
+    dimensions: '14", 12", 10" Heights',
+    care: 'Indoor decor piece. Clean with soft dry brush.',
+    story: 'Cylindrical handcrafted pillars celebrating indigenous Indian folk facial iconography with ornate tilak engravings and vintage burnished texture.',
+    description: 'Trio of handcrafted tribal face totems with earthy antique metallic accents and textured finish.'
+  },
+  {
+    id: 'carved-leaf-box',
+    name: 'Hand-Carved Leaf Motif Keepsake Box',
     category: 'Woodcraft',
     price: 1650,
-    tone: 'wood',
-    badge: 'Limited',
+    originalPrice: 2100,
+    badge: 'Gifting Choice',
     maker: 'Saini Handicrafts',
-    stock: '3 left',
-    image: '/assets/product-wood.png',
-    mood: 'Thoughtful Gift',
-    material: 'Neem wood',
-    care: 'Wipe dry. Refresh with a tiny amount of natural oil every few months.',
-    story: 'Carved from neem wood, hand-sanded, and oil-finished so the grain stays visible under the floral pattern.',
-    description: 'Small storage box carved by hand and finished with plant oils.'
+    stock: '6 units left',
+    image: assetPath('products/carved-leaf-box.jpg'),
+    material: 'Solid Sheesham / Teak Wood',
+    dimensions: '6" x 4.5" x 4"',
+    care: 'Keep dry. Occasionally apply a drop of almond or mineral oil.',
+    story: 'Chiseled from a solid block of seasoned wood featuring a tactile 3D relief leaf on the front facade, perfect for jewelry, heirlooms, and precious trinkets.',
+    description: 'Hand-carved wooden storage box with raised botanical leaf carving and natural grain finish.'
   },
   {
-    id: 'flower-journal',
-    name: 'Pressed Flower Journal',
-    category: 'Paper Craft',
-    price: 920,
-    tone: 'paper',
-    badge: 'Gift pick',
+    id: 'hex-planter-cart',
+    name: 'Hexagonal Trike Wooden Planter Cart',
+    category: 'Woodcraft',
+    price: 1450,
+    originalPrice: 1850,
+    badge: 'Botanical Decor',
     maker: 'Saini Handicrafts',
     stock: 'Ready to ship',
-    image: '/assets/product-journal.png',
-    mood: 'Personal Keepsake',
-    material: 'Handmade paper',
-    care: 'Keep away from moisture and direct sunlight.',
-    story: 'Pressed botanicals are set into deckled paper covers, making each journal feel like a small preserved memory.',
-    description: 'Lay-flat handmade paper journal with pressed botanical cover.'
+    image: assetPath('products/hex-planter-cart.jpg'),
+    material: 'Solid Pine & Reclaimed Teak',
+    dimensions: '12" x 8" x 7"',
+    care: 'Use indoor pot liner to prevent direct water-wood contact.',
+    story: 'Handcrafted tricycle cart with geometric hexagonal wooden wheels, built to cradle small bonsai, succulents, or micro-greens for desks and shelves.',
+    description: 'Artisan geometric wooden planter tricycle with dual hexagonal front wheels and natural wood finish.'
   }
 ];
 
-const blankProduct = {
-  name: '',
-  category: 'Ceramic Decor',
-  price: 999,
-  badge: 'New',
-  stock: 'Ready to ship',
-  mood: 'Warm Home',
-  material: 'Handmade craft',
-  care: 'Handle gently and keep dry.',
-  story: '',
-  description: '',
-  image: ''
-};
-
-const processSteps = [
-  ['Sketch', 'Idea, size, shape, and use-case are mapped before material work starts.'],
-  ['Make', 'Clay, cloth, wood, and paper are shaped slowly with visible maker touch.'],
-  ['Finish', 'Each piece is checked, wrapped, and prepared like a gift, not inventory.']
-];
-
-const moodFilters = ['All', 'Warm Home', 'Festive Table', 'Thoughtful Gift', 'Personal Keepsake'];
-const materialFilters = ['All materials', 'Terracotta clay', 'Handwoven cotton', 'Neem wood', 'Handmade paper'];
-const priceFilters = ['All prices', 'Under Rs. 1,000', 'Rs. 1,000 - Rs. 2,000', 'Above Rs. 2,000'];
-const wishlistCollections = ['Wedding Gifts', 'Home Decor', 'Festival Picks'];
-
-const giftPrompts = {
-  'Home warming': {
-    product: 'Terracotta Bloom Vase',
-    reason: 'A warm decor piece for entry tables, shelves, and new-home corners.'
-  },
-  'Festival hosting': {
-    product: 'Indigo Loom Runner',
-    reason: 'Adds a handmade table setting for dinners, puja setups, and festive meals.'
-  },
-  'Personal note': {
-    product: 'Pressed Flower Journal',
-    reason: 'Feels intimate for writers, students, memory keeping, and thoughtful notes.'
-  },
-  'Premium keepsake': {
-    product: 'Carved Neem Keepsake Box',
-    reason: 'A lasting handmade object for jewellery, letters, and small treasures.'
-  }
-};
-
-const roomGuides = {
-  'Living room': {
-    product: 'Terracotta Bloom Vase',
-    tip: 'Place it on a console or open shelf with warm light and neutral books.'
-  },
-  'Dining table': {
-    product: 'Indigo Loom Runner',
-    tip: 'Use it as the first layer, then add brass accents or handmade bowls.'
-  },
-  'Puja corner': {
-    product: 'Terracotta Bloom Vase',
-    tip: 'Pair clay textures with flowers, diyas, and a small wooden tray.'
-  },
-  'Writing desk': {
-    product: 'Pressed Flower Journal',
-    tip: 'Keep it near stationery, dried flowers, and a small keepsake object.'
-  },
-  'Gift table': {
-    product: 'Carved Neem Keepsake Box',
-    tip: 'Wrap it with cotton ribbon and a handwritten note for a premium gift.'
-  }
-};
-
-const packagingStyles = {
-  'Natural craft wrap': {
-    color: '#d8bf8f',
-    detail: 'Kraft paper, cotton cord, dried leaf tag, and a handwritten note.'
-  },
-  'Festive premium box': {
-    color: '#b95e3e',
-    detail: 'Terracotta sleeve, gold seal, fabric ribbon, and festive greeting card.'
-  },
-  'Corporate minimal hamper': {
-    color: '#245c62',
-    detail: 'Structured box, clean label, neutral wrap, and branded note card.'
-  }
-};
-
-const colorStories = {
-  Terracotta: {
-    color: '#b95e3e',
-    mood: 'Warm Home',
-    copy: 'Earthy, warm, and perfect for corners that need handmade presence.'
-  },
-  Indigo: {
-    color: '#245c62',
-    mood: 'Festive Table',
-    copy: 'Deep, calm, and elegant for dining tables and textile-led settings.'
-  },
-  Neem: {
-    color: '#7e5336',
-    mood: 'Thoughtful Gift',
-    copy: 'Grounded wood tones for keepsakes, memory boxes, and premium gifting.'
-  },
-  Ivory: {
-    color: '#d9c78e',
-    mood: 'Personal Keepsake',
-    copy: 'Soft handmade-paper mood for journals, notes, and delicate gifts.'
-  }
-};
-
-const festivalCollections = {
-  Diwali: {
-    product: 'Terracotta Bloom Vase',
-    copy: 'Warm clay textures, flower corners, and festive gifting.'
-  },
-  Wedding: {
-    product: 'Carved Neem Keepsake Box',
-    copy: 'Premium keepsakes for couples, family gifts, and trousseau moments.'
-  },
-  Rakhi: {
-    product: 'Pressed Flower Journal',
-    copy: 'Personal gifts with handwritten notes and delicate packaging.'
-  },
-  Corporate: {
-    product: 'Indigo Loom Runner',
-    copy: 'Useful handcrafted gifts with polished packaging and repeat ordering.'
-  }
-};
-
-const makerSpots = [
-  ['Clay corner', 'Jaipur-inspired pottery', 'Terracotta Bloom Vase'],
-  ['Loom table', 'Indigo cotton and block print', 'Indigo Loom Runner'],
-  ['Wood bench', 'Carved neem keepsakes', 'Carved Neem Keepsake Box'],
-  ['Paper desk', 'Pressed botanicals and journals', 'Pressed Flower Journal']
-];
-
+const categories = ['All', 'Wall Decor', 'Woodcraft', 'Sculptural Art'];
 const ADMIN_CODE = 'SAINI-ADMIN';
 const ADMIN_EMAIL = 'owner@sainihandicrafts.com';
 
-function loadSavedProducts() {
+function getStoredProducts() {
   try {
-    return JSON.parse(localStorage.getItem('saini-products')) || [];
+    return JSON.parse(localStorage.getItem('saini_custom_products')) || [];
   } catch {
     return [];
   }
 }
 
-function loadSavedAccount() {
-  try {
-    return JSON.parse(localStorage.getItem('saini-account')) || null;
-  } catch {
-    return null;
-  }
-}
-
-function loadSavedWishlist() {
-  try {
-    return JSON.parse(localStorage.getItem('saini-wishlist')) || {};
-  } catch {
-    return {};
-  }
-}
-
 function App() {
-  const [customProducts, setCustomProducts] = useState(loadSavedProducts);
-  const [account, setAccount] = useState(loadSavedAccount);
-  const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem('saini-admin') === 'true');
-  const [cart, setCart] = useState({ 'terracotta-vase': 1, 'indigo-runner': 1 });
-  const [cartOpen, setCartOpen] = useState(false);
-  const [navOpen, setNavOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [customProducts, setCustomProducts] = useState(getStoredProducts);
+  const [activeCategory, setActiveCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
-  const [moodFilter, setMoodFilter] = useState('All');
-  const [materialFilter, setMaterialFilter] = useState('All materials');
-  const [priceFilter, setPriceFilter] = useState('All prices');
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [sortBy, setSortBy] = useState('featured');
+  const [cart, setCart] = useState({ 'kalpavriksha-mural': 1 });
+  const [cartOpen, setCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [activeGalleryImage, setActiveGalleryImage] = useState('');
-  const [wishlistNote, setWishlistNote] = useState('');
-  const [wishlist, setWishlist] = useState(loadSavedWishlist);
-  const [giftMood, setGiftMood] = useState('Home warming');
-  const [quiz, setQuiz] = useState({ person: 'Family', budget: 'Rs. 1,000 - Rs. 2,000', style: 'Warm Home' });
-  const [giftBox, setGiftBox] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState('Living room');
-  const [packagingStyle, setPackagingStyle] = useState('Natural craft wrap');
-  const [selectedColor, setSelectedColor] = useState('Terracotta');
-  const [selectedFestival, setSelectedFestival] = useState('Diwali');
-  const [stylingAfter, setStylingAfter] = useState(false);
-  const [selectedMaker, setSelectedMaker] = useState(makerSpots[0][0]);
-  const [styleBoard, setStyleBoard] = useState(['terracotta-vase', 'indigo-runner']);
-  const [budgetLimit, setBudgetLimit] = useState(2500);
-  const [giftNote, setGiftNote] = useState('For a home filled with warmth and handmade stories.');
-  const [dropReminder, setDropReminder] = useState(false);
-  const [compareIds, setCompareIds] = useState(['terracotta-vase', 'neem-box']);
-  const [coupon, setCoupon] = useState('');
-  const [couponApplied, setCouponApplied] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [checkoutDone, setCheckoutDone] = useState(false);
-  const [requestSent, setRequestSent] = useState(false);
-  const [productForm, setProductForm] = useState(blankProduct);
-  const [editingProductId, setEditingProductId] = useState('');
-  const [customReference, setCustomReference] = useState('');
-  const [adminForm, setAdminForm] = useState({ email: '', code: '' });
+  const [checkoutSuccess, setCheckoutSuccess] = useState(false);
+  const [couponCode, setCouponCode] = useState('');
+  const [couponApplied, setCouponApplied] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [navOpen, setNavOpen] = useState(false);
+
+  // Custom Commission Form
+  const [customCommission, setCustomCommission] = useState({
+    name: '',
+    phone: '',
+    type: 'Brass Wall Mural',
+    details: '',
+    reference: ''
+  });
+  const [commissionSubmitted, setCommissionSubmitted] = useState(false);
+
+  // Owner Admin States
+  const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem('saini_admin_logged') === 'true');
+  const [adminModalOpen, setAdminModalOpen] = useState(false);
+  const [adminEmail, setAdminEmail] = useState('');
+  const [adminCode, setAdminCode] = useState('');
   const [adminError, setAdminError] = useState('');
-  const [accountForm, setAccountForm] = useState({
-    name: account?.name || '',
-    email: account?.email || '',
-    phone: account?.phone || ''
+  const [productForm, setProductForm] = useState({
+    name: '',
+    category: 'Wall Decor',
+    price: 2999,
+    originalPrice: 3599,
+    badge: 'New Arrival',
+    stock: 'Ready to ship',
+    material: 'Brass / Wood',
+    dimensions: '12" x 12"',
+    care: 'Dust with soft dry cloth.',
+    story: '',
+    description: '',
+    image: ''
+  });
+  const [editingId, setEditingId] = useState('');
+
+  // Checkout Form
+  const [checkoutData, setCheckoutData] = useState({
+    name: 'Pankaj Saini',
+    phone: '+91 98765 43210',
+    address: 'Artisan Workshop, Civil Lines, Jaipur, Rajasthan - 302006',
+    paymentMethod: 'Cash on Delivery (COD)'
   });
 
-  const products = useMemo(() => [...starterProducts, ...customProducts], [customProducts]);
-  const visibleProducts = useMemo(() => {
-    const query = searchTerm.trim().toLowerCase();
-    return products.filter((product) => {
-      const matchesMood = moodFilter === 'All' || product.mood === moodFilter;
-      const matchesMaterial = materialFilter === 'All materials' || product.material === materialFilter;
-      const matchesPrice =
-        priceFilter === 'All prices' ||
-        (priceFilter === 'Under Rs. 1,000' && product.price < 1000) ||
-        (priceFilter === 'Rs. 1,000 - Rs. 2,000' && product.price >= 1000 && product.price <= 2000) ||
-        (priceFilter === 'Above Rs. 2,000' && product.price > 2000);
-      const matchesSearch = !query || [product.name, product.category, product.description, product.stock, product.mood, product.material]
-        .some((value) => String(value || '').toLowerCase().includes(query));
-      return matchesMood && matchesMaterial && matchesPrice && matchesSearch;
+  const allProducts = useMemo(() => [...initialProducts, ...customProducts], [customProducts]);
+
+  const filteredProducts = useMemo(() => {
+    let result = allProducts.filter((item) => {
+      const matchCat = activeCategory === 'All' || item.category === activeCategory;
+      const q = searchTerm.trim().toLowerCase();
+      const matchSearch = !q || [item.name, item.category, item.description, item.material, item.badge]
+        .some((val) => String(val || '').toLowerCase().includes(q));
+      return matchCat && matchSearch;
     });
-  }, [products, searchTerm, moodFilter, materialFilter, priceFilter]);
-  const productById = useMemo(() => Object.fromEntries(products.map((product) => [product.id, product])), [products]);
-  const cartCount = useMemo(() => Object.values(cart).reduce((sum, qty) => sum + qty, 0), [cart]);
-  const total = useMemo(
-    () => Object.entries(cart).reduce((sum, [id, qty]) => sum + (productById[id]?.price || 0) * qty, 0),
-    [cart, productById]
-  );
-  const discount = couponApplied ? Math.round(total * 0.1) : 0;
-  const payableTotal = Math.max(total - discount, 0);
-  const quizRecommendation = useMemo(() => (
-    products.find((product) => product.mood === quiz.style && (
-      quiz.budget === 'Above Rs. 2,000' ? product.price > 2000 :
-      quiz.budget === 'Under Rs. 1,000' ? product.price < 1000 :
-      product.price >= 1000 && product.price <= 2000
-    )) || products[0]
-  ), [products, quiz]);
-  const roomProduct = useMemo(() => (
-    products.find((product) => product.name === roomGuides[selectedRoom].product) || products[0]
-  ), [products, selectedRoom]);
-  const certificateProduct = useMemo(() => (
-    productById[Object.keys(cart)[0]] || products[0]
-  ), [cart, productById, products]);
-  const festivalProduct = useMemo(() => (
-    products.find((product) => product.name === festivalCollections[selectedFestival].product) || products[0]
-  ), [products, selectedFestival]);
-  const colorProduct = useMemo(() => (
-    products.find((product) => product.mood === colorStories[selectedColor].mood) || products[0]
-  ), [products, selectedColor]);
-  const makerProduct = useMemo(() => {
-    const spot = makerSpots.find(([name]) => name === selectedMaker) || makerSpots[0];
-    return products.find((product) => product.name === spot[2]) || products[0];
-  }, [products, selectedMaker]);
-  const budgetPicks = useMemo(() => (
-    products.filter((product) => product.price <= budgetLimit).slice(0, 3)
-  ), [products, budgetLimit]);
-  const comparedProducts = useMemo(() => (
-    compareIds.map((id) => productById[id]).filter(Boolean)
-  ), [compareIds, productById]);
-  const styleBoardProducts = useMemo(() => (
-    styleBoard.map((id) => productById[id]).filter(Boolean)
-  ), [styleBoard, productById]);
+
+    if (sortBy === 'price-low') {
+      result = [...result].sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'price-high') {
+      result = [...result].sort((a, b) => b.price - a.price);
+    }
+
+    return result;
+  }, [allProducts, activeCategory, searchTerm, sortBy]);
+
+  const productMap = useMemo(() => Object.fromEntries(allProducts.map((p) => [p.id, p])), [allProducts]);
+  const cartItemCount = useMemo(() => Object.values(cart).reduce((sum, qty) => sum + qty, 0), [cart]);
+  const subtotal = useMemo(() => Object.entries(cart).reduce((sum, [id, qty]) => sum + (productMap[id]?.price || 0) * qty, 0), [cart, productMap]);
+  const discount = couponApplied ? Math.round(subtotal * 0.1) : 0;
+  const finalTotal = Math.max(subtotal - discount, 0);
 
   useEffect(() => {
-    localStorage.setItem('saini-products', JSON.stringify(customProducts));
+    localStorage.setItem('saini_custom_products', JSON.stringify(customProducts));
   }, [customProducts]);
 
-  useEffect(() => {
-    if (account) {
-      localStorage.setItem('saini-account', JSON.stringify(account));
-    }
-  }, [account]);
+  const showToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(''), 2500);
+  };
 
-  useEffect(() => {
-    localStorage.setItem('saini-wishlist', JSON.stringify(wishlist));
-  }, [wishlist]);
-
-  const updateCart = (id, delta) => {
+  const updateCartQty = (id, delta) => {
     setCart((current) => {
       const next = { ...current };
-      const quantity = (next[id] || 0) + delta;
-      if (quantity <= 0) {
+      const newQty = (next[id] || 0) + delta;
+      if (newQty <= 0) {
         delete next[id];
       } else {
-        next[id] = quantity;
+        next[id] = newQty;
       }
       return next;
     });
   };
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      setProductForm((current) => ({ ...current, image: reader.result }));
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const addProduct = (event) => {
-    event.preventDefault();
-    if (!isAdmin) return;
-    if (!productForm.name.trim()) return;
-
-    const product = {
-      ...productForm,
-      id: editingProductId || `${productForm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${Date.now()}`,
-      maker: 'Saini Handicrafts',
-      price: Number(productForm.price) || 0,
-      tone: ['clay', 'indigo', 'wood', 'paper'][customProducts.length % 4]
-    };
-
-    setCustomProducts((current) => editingProductId
-      ? current.map((item) => item.id === editingProductId ? product : item)
-      : [product, ...current]
-    );
-    setProductForm(blankProduct);
-    setEditingProductId('');
-  };
-
-  const saveAccount = (event) => {
-    event.preventDefault();
-    if (!accountForm.name.trim() || !accountForm.email.trim()) return;
-    setAccount(accountForm);
-  };
-
-  const loginAdmin = (event) => {
-    event.preventDefault();
-    if (adminForm.email.trim().toLowerCase() === ADMIN_EMAIL && adminForm.code.trim() === ADMIN_CODE) {
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    if (adminEmail.trim().toLowerCase() === ADMIN_EMAIL && adminCode.trim() === ADMIN_CODE) {
       setIsAdmin(true);
       setAdminError('');
-      localStorage.setItem('saini-admin', 'true');
-      return;
+      localStorage.setItem('saini_admin_logged', 'true');
+      showToast('Welcome back, Saini Handicrafts Owner!');
+    } else {
+      setAdminError('Invalid email or passcode. Use the demo credentials provided.');
     }
-    setAdminError('Incorrect owner ID or password. Use the demo credentials shown below.');
   };
 
-  const logoutAdmin = () => {
+  const handleAdminLogout = () => {
     setIsAdmin(false);
-    localStorage.removeItem('saini-admin');
-    setProductForm(blankProduct);
+    localStorage.removeItem('saini_admin_logged');
+    showToast('Logged out of Owner Dashboard');
   };
 
-  const submitCheckout = (event) => {
-    event.preventDefault();
-    setCheckoutDone(true);
-  };
+  const handleProductSubmit = (e) => {
+    e.preventDefault();
+    if (!productForm.name.trim()) return;
 
-  const applyCoupon = () => {
-    setCouponApplied(coupon.trim().toUpperCase() === 'SAINI10');
-  };
+    const newProd = {
+      ...productForm,
+      id: editingId || `custom-${Date.now()}`,
+      maker: 'Saini Handicrafts',
+      price: Number(productForm.price) || 0,
+      originalPrice: Number(productForm.originalPrice) || Number(productForm.price) * 1.25
+    };
 
-  const sendCustomRequest = (event) => {
-    event.preventDefault();
-    setRequestSent(true);
-  };
+    if (editingId) {
+      setCustomProducts((prev) => prev.map((p) => (p.id === editingId ? newProd : p)));
+      showToast(`Updated "${newProd.name}"`);
+    } else {
+      setCustomProducts((prev) => [newProd, ...prev]);
+      showToast(`Added "${newProd.name}" to store`);
+    }
 
-  const saveWishlist = (product) => {
-    setWishlist((current) => {
-      const collection = product.mood === 'Festive Table' ? 'Festival Picks' : product.mood === 'Thoughtful Gift' ? 'Wedding Gifts' : 'Home Decor';
-      return {
-        ...current,
-        [collection]: [...new Set([...(current[collection] || []), product.id])]
-      };
+    setProductForm({
+      name: '',
+      category: 'Wall Decor',
+      price: 2999,
+      originalPrice: 3599,
+      badge: 'New Arrival',
+      stock: 'Ready to ship',
+      material: 'Brass / Wood',
+      dimensions: '12" x 12"',
+      care: 'Dust with soft dry cloth.',
+      story: '',
+      description: '',
+      image: ''
     });
-    setWishlistNote(`${product.name} saved to your craft wishlist`);
-    setTimeout(() => setWishlistNote(''), 2200);
+    setEditingId('');
   };
 
-  const handleReferenceUpload = (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => setCustomReference(reader.result);
-    reader.readAsDataURL(file);
+  const applyPromo = () => {
+    if (couponCode.trim().toUpperCase() === 'SAINI10') {
+      setCouponApplied(true);
+      showToast('10% artisan promo code applied!');
+    } else {
+      showToast('Invalid coupon. Try SAINI10');
+    }
   };
 
-  const editProduct = (product) => {
-    setEditingProductId(product.id);
-    setProductForm({ ...blankProduct, ...product });
-    document.getElementById('admin')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const deleteProduct = (id) => {
-    setCustomProducts((current) => current.filter((product) => product.id !== id));
-  };
-
-  const addToGiftBox = (product) => {
-    setGiftBox((current) => current.includes(product.id) ? current : [...current, product.id]);
-  };
-
-  const toggleStyleBoard = (product) => {
-    setStyleBoard((current) => current.includes(product.id)
-      ? current.filter((id) => id !== product.id)
-      : [...current, product.id].slice(-4)
-    );
-  };
-
-  const toggleCompare = (product) => {
-    setCompareIds((current) => current.includes(product.id)
-      ? current.filter((id) => id !== product.id)
-      : [...current, product.id].slice(-3)
-    );
-  };
-
-  const openProduct = (product) => {
-    setSelectedProduct(product);
-    setActiveGalleryImage(product.image);
-  };
-
-  const whatsAppUrl = `https://wa.me/?text=${encodeURIComponent(`Hello Saini Handicrafts, I want to order: ${Object.entries(cart).map(([id, qty]) => `${productById[id]?.name} x ${qty}`).join(', ')}. Total: Rs. ${payableTotal.toLocaleString('en-IN')}`)}`;
+  const whatsAppOrderText = encodeURIComponent(
+    `Hello Saini Handicrafts! I would like to place an order:\n\n${Object.entries(cart)
+      .map(([id, qty]) => `• ${productMap[id]?.name || id} x ${qty} (Rs. ${(productMap[id]?.price || 0) * qty})`)
+      .join('\n')}\n\nTotal Amount: Rs. ${finalTotal.toLocaleString('en-IN')}\nDelivery To: ${checkoutData.name}, ${checkoutData.address}`
+  );
 
   return (
-    <main>
-      <header className="nav">
-        <a className="brand" href="#top" aria-label="Saini Handicrafts home">
-          <span className="brand-mark">SH</span>
-          <span>Saini Handicrafts</span>
-        </a>
-        <nav className={navOpen ? 'nav-links open' : 'nav-links'} aria-label="Main navigation">
-          <a href="#shop">Shop</a>
-          <a href="#rooms">Rooms</a>
-          <a href="#colors">Colors</a>
-          <a href="#quiz">Guide</a>
-          <a href="#lab">Lab</a>
-          <a href="#giftbox">Gifts</a>
-          <a href="#custom">Custom</a>
-          <a href="#admin">Owner</a>
-        </nav>
-        <div className="nav-actions">
-          <button className="icon-button" aria-label="Search products" onClick={() => setSearchOpen(!searchOpen)}>
-            <Search size={19} />
-          </button>
-          <button className="cart-button" aria-label={`${cartCount} items in cart`} onClick={() => setCartOpen(true)}>
-            <ShoppingBag size={19} />
-            <span>{cartCount}</span>
-          </button>
-          <a className="icon-button account-link" href="#account" aria-label="Customer account">
-            <User size={19} />
+    <div className="site-wrapper">
+      {/* 1. Clean Top Announcement */}
+      <div className="top-strip">
+        <span>Authentic Indian Heritage Handicrafts • Direct Workshop Pricing • Free Pan-India Insured Shipping</span>
+      </div>
+
+      {/* 2. Professional Header */}
+      <header className="header">
+        <div className="header-container">
+          <a href="#top" className="logo">
+            <span className="logo-badge">SH</span>
+            <div>
+              <span className="logo-title">SAINI HANDICRAFTS</span>
+              <span className="logo-sub">Artisan Atelier • Jaipur</span>
+            </div>
           </a>
-          <button className="icon-button mobile-toggle" aria-label="Toggle menu" onClick={() => setNavOpen(!navOpen)}>
-            {navOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+
+          <nav className={`nav-menu ${navOpen ? 'open' : ''}`}>
+            <a href="#collection" onClick={() => setNavOpen(false)}>Collection</a>
+            <a href="#heritage" onClick={() => setNavOpen(false)}>Craft Heritage</a>
+            <a href="#custom" onClick={() => setNavOpen(false)}>Custom Orders</a>
+            <a href="#contact" onClick={() => setNavOpen(false)}>Contact & Visit</a>
+          </nav>
+
+          <div className="header-actions">
+            <button className="btn-icon" aria-label="Search" onClick={() => setSearchOpen(!searchOpen)}>
+              <Search size={18} />
+            </button>
+            <button className="btn-cart" aria-label="Cart" onClick={() => setCartOpen(true)}>
+              <ShoppingBag size={18} />
+              <span>{cartItemCount}</span>
+            </button>
+            <button className="btn-admin-pill" onClick={() => setAdminModalOpen(true)}>
+              {isAdmin ? <><CheckCircle size={14} /> Owner Active</> : <><Lock size={14} /> Owner Login</>}
+            </button>
+            <button className="btn-icon mobile-menu-toggle" aria-label="Menu" onClick={() => setNavOpen(!navOpen)}>
+              {navOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
+
+        {searchOpen && (
+          <div className="header-search-bar">
+            <Search size={18} />
+            <input
+              autoFocus
+              type="text"
+              placeholder="Search by product name, brass, teak wood, mural, sculpture..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button onClick={() => setSearchOpen(false)}><X size={16} /></button>
+          </div>
+        )}
       </header>
 
-      {searchOpen ? (
-        <section className="search-panel" aria-label="Product search">
-          <Search size={20} />
-          <input
-            autoFocus
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-            placeholder="Search ceramics, textiles, woodcraft..."
-          />
-          <button className="icon-button" aria-label="Close search" onClick={() => setSearchOpen(false)}>
-            <X size={18} />
-          </button>
-        </section>
-      ) : null}
-
-      <section className="hero" id="top">
-        <img src="/assets/artisan-hero.png" alt="Curated handmade ceramics, textiles, woodcraft, and paper goods" />
-        <div className="hero-copy">
-          <span className="eyebrow">
-            <Sparkles size={16} /> Saini Handicrafts
-          </span>
-          <h1>Handmade pieces with a personal story.</h1>
-          <p>
-            Sell ceramics, textiles, woodwork, decor, gifts, and custom creative work through a warm modern storefront.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-button" href="#shop">
-              Shop collection <ArrowRight size={18} />
-            </a>
-            <a className="ghost-button" href="#custom">Request custom work</a>
+      {/* 3. Refined Editorial Hero */}
+      <section className="hero-section" id="top">
+        <div className="hero-grid">
+          <div className="hero-text-content">
+            <span className="section-eyebrow"><Sparkles size={14} /> Traditional Handcrafting</span>
+            <h1 className="hero-headline">Authentic Indian crafts, shaped with soul and patience.</h1>
+            <p className="hero-desc">
+              Discover genuine hand-beaten brass wall murals, natural live-edge teak clocks, and carved tribal sculptures direct from our artisan workshop in Rajasthan.
+            </p>
+            <div className="hero-btn-row">
+              <a href="#collection" className="btn-primary">
+                View Collection ({allProducts.length} Pieces) <ArrowRight size={17} />
+              </a>
+              <a href="#custom" className="btn-secondary">
+                Request Custom Size
+              </a>
+            </div>
+            <div className="hero-guarantee-strip">
+              <div><strong>100%</strong> <span>Genuine Craft</span></div>
+              <div className="hero-sep" />
+              <div><strong>3D Detail</strong> <span>Hand Chiseled</span></div>
+              <div className="hero-sep" />
+              <div><strong>Safe Transit</strong> <span>Insured Boxing</span></div>
+            </div>
           </div>
-        </div>
-        <div className="floating-ticket" aria-hidden="true">
-          <span>New drop</span>
-          <strong>34 handmade pieces</strong>
-          <small>crafted in small batches</small>
-        </div>
-      </section>
 
-      <section className="trust-strip" aria-label="Store promises">
-        <div>
-          <PackageCheck size={21} />
-          <span>Customer-friendly shopping</span>
-        </div>
-        <div>
-          <Truck size={21} />
-          <span>Owner-only product control</span>
-        </div>
-        <div>
-          <BadgeCheck size={21} />
-          <span>Customer account demo</span>
-        </div>
-      </section>
-
-      <section className="section" id="shop">
-        <div className="section-heading">
-          <span className="eyebrow">shop collection</span>
-          <h2>Fresh from Saini Handicrafts</h2>
-          <p>Each product card shows the material, mood, availability, and a quick quantity control for a smooth buyer experience.</p>
-        </div>
-        <div className="mood-rail" aria-label="Shop by mood">
-          {moodFilters.map((mood) => (
-            <button
-              className={moodFilter === mood ? 'active' : ''}
-              key={mood}
-              onClick={() => setMoodFilter(mood)}
-            >
-              {mood}
-            </button>
-          ))}
-        </div>
-        <div className="advanced-filters" aria-label="Advanced product filters">
-          <span><SlidersHorizontal size={17} /> Fine tune</span>
-          <select value={materialFilter} onChange={(event) => setMaterialFilter(event.target.value)}>
-            {materialFilters.map((filter) => <option key={filter}>{filter}</option>)}
-          </select>
-          <select value={priceFilter} onChange={(event) => setPriceFilter(event.target.value)}>
-            {priceFilters.map((filter) => <option key={filter}>{filter}</option>)}
-          </select>
-        </div>
-        <div className="product-grid">
-          {visibleProducts.map((product) => (
-            <article className="product-card" key={product.id}>
-              <button className="heart-button" aria-label={`Save ${product.name}`} onClick={() => saveWishlist(product)}>
-                <Heart size={18} />
-              </button>
-              <div className={`product-art ${product.tone}`}>
-                {product.image ? <img src={product.image} alt={product.name} /> : null}
-                <span>{product.category}</span>
-              </div>
-              <div className="product-body">
-                <div className="product-meta">
-                  <span>{product.badge}</span>
-                  <span>{product.stock}</span>
-                </div>
-                <h3>{product.name}</h3>
-                <div className="craft-tags">
-                <span>{product.mood || 'Handmade'}</span>
-                <span>{product.material || 'Craft material'}</span>
-                </div>
-                <p>{product.description}</p>
-                <div className="buy-row">
-                  <strong>Rs. {product.price.toLocaleString('en-IN')}</strong>
-                  <div className="stepper" aria-label={`Quantity for ${product.name}`}>
-                    <button onClick={() => updateCart(product.id, -1)} aria-label={`Remove ${product.name}`}>
-                      <Minus size={15} />
-                    </button>
-                    <span>{cart[product.id] || 0}</span>
-                    <button onClick={() => updateCart(product.id, 1)} aria-label={`Add ${product.name}`}>
-                      <Plus size={15} />
-                    </button>
-                  </div>
-                </div>
-                <button className="story-button" onClick={() => openProduct(product)}>
-                  View craft story <ArrowRight size={16} />
-                </button>
-                <button className="story-button secondary-story" onClick={() => addToGiftBox(product)}>
-                  Add to gift box <Gift size={16} />
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
-        {visibleProducts.length === 0 ? (
-          <p className="empty-state">No products matched your search. Try decor, ceramic, textile, or gift.</p>
-        ) : null}
-      </section>
-
-      <section className="craft-process">
-        <div className="section-heading compact">
-          <span className="eyebrow">how it feels</span>
-          <h2>A shop experience built around making, not just selling</h2>
-        </div>
-        <div className="process-grid">
-          {processSteps.map(([title, copy], index) => (
-            <article key={title}>
-              <span>0{index + 1}</span>
-              <h3>{title}</h3>
-              <p>{copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="room-styler" id="rooms">
-        <div>
-          <span className="eyebrow">craft your room</span>
-          <h2>Choose a space and get a clear product suggestion</h2>
-          <p>Pick where the item will be used. The site recommends one handmade piece, shows why it fits, and opens the product story.</p>
-          <div className="room-tabs">
-            {Object.keys(roomGuides).map((room) => (
-              <button className={selectedRoom === room ? 'active' : ''} key={room} onClick={() => setSelectedRoom(room)}>
-                {room}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="room-preview">
-          <img className="room-product-image" src={roomProduct?.image} alt={roomProduct?.name} />
-          <div className="room-recommendation">
-            <span>Best for {selectedRoom}</span>
-            <strong>{roomProduct?.name}</strong>
-            <p>{roomGuides[selectedRoom].tip}</p>
-            <button className="primary-button" onClick={() => roomProduct && openProduct(roomProduct)}>
-              View in detail <ArrowRight size={18} />
-            </button>
+          <div className="hero-image-wrap">
+            <img src={assetPath('products/kalpavriksha-mural.jpg')} alt="Kalpavriksha Brass Mural" />
+            <div className="hero-badge-card">
+              <strong>Kalpavriksha Brass Mural</strong>
+              <span>Hand-Embossed Relief Plaque • Rs. 4,890</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="color-shopper" id="colors">
-        <div>
-          <span className="eyebrow">color mood shopping</span>
-          <h2>Let users shop by the feeling of a color</h2>
-          <p>Colors are easier to choose than product categories. This creates a more visual route into the collection.</p>
-          <div className="swatch-row">
-            {Object.entries(colorStories).map(([name, story]) => (
+      {/* 4. Trust Highlights Bar */}
+      <section className="trust-bar">
+        <div className="trust-item">
+          <ShieldCheck size={24} />
+          <div>
+            <strong>Authentic Heritage</strong>
+            <span>Direct small-batch artisan crafting</span>
+          </div>
+        </div>
+        <div className="trust-item">
+          <Truck size={24} />
+          <div>
+            <strong>Safe Insured Shipping</strong>
+            <span>Secure wood-cushioned delivery</span>
+          </div>
+        </div>
+        <div className="trust-item">
+          <BadgeCheck size={24} />
+          <div>
+            <strong>Certificate of Authenticity</strong>
+            <span>Sealed with every master commission</span>
+          </div>
+        </div>
+        <div className="trust-item">
+          <MessageCircle size={24} />
+          <div>
+            <strong>Workshop Direct Support</strong>
+            <span>WhatsApp assistance & custom sizing</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Main Clean Product Catalog */}
+      <section className="catalog-section" id="collection">
+        <div className="section-head">
+          <span className="section-eyebrow">curated catalog</span>
+          <h2>The Handcrafted Collection</h2>
+          <p>Explore our full range of live-edge woodcrafts, antique brass relief art, and sacred sculptures.</p>
+        </div>
+
+        {/* Filter & Sort Controls */}
+        <div className="catalog-controls">
+          <div className="category-pills">
+            {categories.map((cat) => (
               <button
-                className={selectedColor === name ? 'active' : ''}
-                key={name}
-                onClick={() => setSelectedColor(name)}
-                style={{ '--swatch': story.color }}
+                key={cat}
+                className={activeCategory === cat ? 'active' : ''}
+                onClick={() => setActiveCategory(cat)}
               >
-                <span />
-                {name}
+                {cat}
               </button>
             ))}
           </div>
-        </div>
-        <div className="color-result">
-          <div className="color-poster" style={{ '--poster': colorStories[selectedColor].color }}>
-            <span>{selectedColor}</span>
-          </div>
-          <div>
-            <strong>{colorProduct?.name}</strong>
-            <p>{colorStories[selectedColor].copy}</p>
-            <button className="primary-button" onClick={() => colorProduct && openProduct(colorProduct)}>
-              Explore this color <ArrowRight size={18} />
-            </button>
-          </div>
-        </div>
-      </section>
 
-      <section className="festival-mode">
-        <div className="section-heading compact">
-          <span className="eyebrow">festival mode</span>
-          <h2>Collections shaped around Indian gifting moments</h2>
-        </div>
-        <div className="festival-grid">
-          {Object.entries(festivalCollections).map(([festival, collection]) => (
-            <button
-              className={selectedFestival === festival ? 'active' : ''}
-              key={festival}
-              onClick={() => setSelectedFestival(festival)}
-            >
-              <span>{festival}</span>
-              <small>{collection.copy}</small>
-            </button>
-          ))}
-        </div>
-        <div className="festival-feature">
-          <img src={festivalProduct?.image} alt="" />
-          <div>
-            <span className="eyebrow">{selectedFestival} pick</span>
-            <h3>{festivalProduct?.name}</h3>
-            <p>{festivalCollections[selectedFestival].copy}</p>
-            <button className="primary-button" onClick={() => festivalProduct && openProduct(festivalProduct)}>
-              View collection piece <Sparkles size={18} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="before-after">
-        <div>
-          <span className="eyebrow">styling preview</span>
-          <h2>Show a simple styling transformation</h2>
-          <p>This preview makes the value clear: a plain corner becomes warmer when handmade texture is added.</p>
-          <button className="primary-button" onClick={() => setStylingAfter(!stylingAfter)}>
-            {stylingAfter ? 'Show before' : 'Show after'} <ArrowRight size={18} />
-          </button>
-        </div>
-        <div className="style-comparison">
-          <article>
-            <span>Before</span>
-            <div className="plain-corner">
-              <div />
-            </div>
-            <p>Plain shelf with no material story.</p>
-          </article>
-          <article className={stylingAfter ? 'active' : ''}>
-            <span>After</span>
-            <div className="styled-corner">
-              <img src="/assets/product-ceramic.png" alt="" />
-              <img src="/assets/product-textile.png" alt="" />
-              <img src="/assets/product-wood.png" alt="" />
-            </div>
-            <p>Layered with clay, textile, and wood pieces from Saini Handicrafts.</p>
-          </article>
-        </div>
-      </section>
-
-      <section className="maker-map">
-        <div>
-          <span className="eyebrow">workshop map</span>
-          <h2>Make the maker process visible</h2>
-          <p>Users can tap each workshop zone to understand where a material story begins.</p>
-        </div>
-        <div className="map-board">
-          {makerSpots.map(([name, copy]) => (
-            <button className={selectedMaker === name ? 'active' : ''} key={name} onClick={() => setSelectedMaker(name)}>
-              <span>{name}</span>
-              <small>{copy}</small>
-            </button>
-          ))}
-        </div>
-        <div className="maker-feature">
-          <img src={makerProduct?.image} alt="" />
-          <div>
-            <strong>{makerProduct?.name}</strong>
-            <p>{makerProduct?.story}</p>
-            <button className="ghost-button" onClick={() => makerProduct && openProduct(makerProduct)}>
-              Open maker story
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="quiz-panel" id="quiz">
-        <div>
-          <span className="eyebrow">personalized discovery</span>
-          <h2>Help shoppers find the right handmade piece faster</h2>
-          <p>A short guided quiz turns open-ended browsing into a friendly recommendation experience.</p>
-        </div>
-        <form className="quiz-card">
-          <label>
-            Who is it for?
-            <select value={quiz.person} onChange={(event) => setQuiz({ ...quiz, person: event.target.value })}>
-              <option>Family</option>
-              <option>Friend</option>
-              <option>Client</option>
-              <option>Self</option>
+          <div className="sort-control">
+            <SlidersHorizontal size={15} />
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value="featured">Featured First</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
             </select>
-          </label>
-          <label>
-            Budget
-            <select value={quiz.budget} onChange={(event) => setQuiz({ ...quiz, budget: event.target.value })}>
-              <option>Under Rs. 1,000</option>
-              <option>Rs. 1,000 - Rs. 2,000</option>
-              <option>Above Rs. 2,000</option>
-            </select>
-          </label>
-          <label>
-            Preferred mood
-            <select value={quiz.style} onChange={(event) => setQuiz({ ...quiz, style: event.target.value })}>
-              {moodFilters.filter((mood) => mood !== 'All').map((mood) => <option key={mood}>{mood}</option>)}
-            </select>
-          </label>
-          <div className="quiz-result">
-            <span>Best match for {quiz.person}</span>
-            <strong>{quizRecommendation.name}</strong>
-            <p>{quizRecommendation.description}</p>
-            <button className="primary-button" type="button" onClick={() => openProduct(quizRecommendation)}>
-              Open recommendation <Sparkles size={18} />
-            </button>
-          </div>
-        </form>
-      </section>
-
-      <section className="gift-finder">
-        <div>
-          <span className="eyebrow">gift finder</span>
-          <h2>Let the shopper choose a feeling first</h2>
-          <p>
-            Instead of asking users to know the product category, this helps them start with the occasion and discover a
-            matching handmade piece.
-          </p>
-        </div>
-        <div className="finder-card">
-          <div className="finder-preview" aria-hidden="true">
-            <span className="preview-label">Gift journey</span>
-            <div>
-              <strong>Occasion</strong>
-              <ArrowRight size={17} />
-              <strong>Suggested craft</strong>
-            </div>
-          </div>
-          <label>
-            What is the gift for?
-            <select value={giftMood} onChange={(event) => setGiftMood(event.target.value)}>
-              {Object.keys(giftPrompts).map((prompt) => (
-                <option key={prompt}>{prompt}</option>
-              ))}
-            </select>
-          </label>
-          <div className="finder-result">
-            <span>Recommended piece</span>
-            <strong>{giftPrompts[giftMood].product}</strong>
-            <p>{giftPrompts[giftMood].reason}</p>
-            <button className="primary-button" onClick={() => {
-              const match = products.find((product) => product.name === giftPrompts[giftMood].product);
-              if (match) openProduct(match);
-            }}>
-              See why it fits <Sparkles size={18} />
-            </button>
-            <button className="ghost-button" onClick={() => {
-              const pick = products[Math.floor(Math.random() * products.length)];
-              if (pick) openProduct(pick);
-            }}>
-              Surprise me
-            </button>
           </div>
         </div>
-      </section>
 
-      <section className="creative-lab" id="lab">
-        <div className="section-heading compact">
-          <span className="eyebrow">creative shopping lab</span>
-          <h2>More playful ways to choose handmade products</h2>
-        </div>
-
-        <div className="lab-grid">
-          <article className="style-board">
-            <span className="eyebrow">style board</span>
-            <h3>Build a mini moodboard</h3>
-            <div className="board-canvas">
-              {styleBoardProducts.map((product) => (
-                <button key={product.id} onClick={() => openProduct(product)}>
-                  <img src={product.image} alt="" />
-                  <span>{product.name}</span>
-                </button>
-              ))}
-            </div>
-            <div className="mini-product-row">
-              {products.map((product) => (
-                <button key={product.id} onClick={() => toggleStyleBoard(product)}>
-                  {styleBoard.includes(product.id) ? 'Remove' : 'Pin'} {product.name}
-                </button>
-              ))}
-            </div>
-          </article>
-
-          <article className="drop-card">
-            <span className="eyebrow">craft drop</span>
-            <h3>Next small-batch release</h3>
-            <div className="countdown-row">
-              <strong>02</strong><span>days</span>
-              <strong>14</strong><span>hours</span>
-              <strong>35</strong><span>mins</span>
-            </div>
-            <p>Preview: festive clay decor, indigo table layers, and limited gift boxes.</p>
-            <button className="primary-button" onClick={() => setDropReminder(true)}>
-              Remind me <Sparkles size={18} />
-            </button>
-            {dropReminder ? <p className="success-note"><CheckCircle size={18} /> Drop reminder saved for demo.</p> : null}
-          </article>
-
-          <article className="budget-curator">
-            <span className="eyebrow">budget curator</span>
-            <h3>Find pieces under Rs. {budgetLimit.toLocaleString('en-IN')}</h3>
-            <input
-              type="range"
-              min="800"
-              max="3000"
-              step="100"
-              value={budgetLimit}
-              onChange={(event) => setBudgetLimit(Number(event.target.value))}
-            />
-            <div className="budget-picks">
-              {budgetPicks.map((product) => (
-                <button key={product.id} onClick={() => openProduct(product)}>
-                  <img src={product.image} alt="" />
-                  <span>{product.name}</span>
-                  <strong>Rs. {product.price.toLocaleString('en-IN')}</strong>
-                </button>
-              ))}
-            </div>
-          </article>
-
-          <article className="note-preview">
-            <span className="eyebrow">gift note preview</span>
-            <h3>Make gifting feel personal</h3>
-            <textarea value={giftNote} onChange={(event) => setGiftNote(event.target.value)} />
-            <div className="handwritten-card">
-              <span>Saini Handicrafts</span>
-              <p>{giftNote}</p>
-            </div>
-          </article>
-
-          <article className="compare-card">
-            <span className="eyebrow">compare pieces</span>
-            <h3>Choose with confidence</h3>
-            <div className="mini-product-row">
-              {products.map((product) => (
-                <button key={product.id} onClick={() => toggleCompare(product)}>
-                  {compareIds.includes(product.id) ? 'Selected' : 'Compare'} {product.name}
-                </button>
-              ))}
-            </div>
-            <div className="compare-table">
-              {comparedProducts.map((product) => (
-                <div key={product.id}>
-                  <img src={product.image} alt="" />
-                  <strong>{product.name}</strong>
-                  <span>{product.material}</span>
-                  <span>{product.stock}</span>
-                  <span>Rs. {product.price.toLocaleString('en-IN')}</span>
-                </div>
-              ))}
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="gift-box-builder" id="giftbox">
-        <div>
-          <span className="eyebrow">gift box builder</span>
-          <h2>Create a curated handmade box</h2>
-          <p>Customers can combine products, choose packaging, and prepare a personalized gifting request.</p>
-        </div>
-        <div className="gift-box-grid">
-          <div className="gift-products">
-            {products.map((product) => (
-              <button key={product.id} onClick={() => addToGiftBox(product)} className={giftBox.includes(product.id) ? 'selected' : ''}>
-                <img src={product.image} alt="" />
-                <span>{product.name}</span>
-              </button>
-            ))}
-          </div>
-          <form className="gift-summary">
-            <label>
-              Packaging style
-              <select value={packagingStyle} onChange={(event) => setPackagingStyle(event.target.value)}>
-                {Object.keys(packagingStyles).map((style) => <option key={style}>{style}</option>)}
-              </select>
-            </label>
-            <div className="packaging-preview" style={{ '--pack-color': packagingStyles[packagingStyle].color }}>
-              <div className="package-box">
-                <span>Saini</span>
+        {/* Product Cards Grid */}
+        <div className="products-grid">
+          {filteredProducts.map((product) => (
+            <div className="card" key={product.id}>
+              <div className="card-image-box" onClick={() => setSelectedProduct(product)}>
+                <img src={product.image} alt={product.name} loading="lazy" />
+                <span className="card-badge">{product.badge}</span>
+                <span className="card-overlay"><Eye size={16} /> Quick View Details</span>
               </div>
-              <div>
-                <strong>{packagingStyle}</strong>
-                <p>{packagingStyles[packagingStyle].detail}</p>
-              </div>
-            </div>
-            <label>
-              Greeting card text
-              <textarea placeholder="Write a short message for the receiver." />
-            </label>
-            <div className="gift-list">
-              <span>{giftBox.length} selected items</span>
-              {giftBox.map((id) => productById[id] ? <strong key={id}>{productById[id].name}</strong> : null)}
-            </div>
-            <button className="primary-button" type="button" onClick={() => setCart((current) => {
-              const next = { ...current };
-              giftBox.forEach((id) => { next[id] = (next[id] || 0) + 1; });
-              setCartOpen(true);
-              return next;
-            })}>
-              Add box to cart <ShoppingBag size={18} />
-            </button>
-          </form>
-        </div>
-      </section>
 
-      <section className="studio-panel" id="admin">
-        <div className="studio-copy">
-          <span className="eyebrow">owner dashboard</span>
-          <h2>{isAdmin ? 'Manage products privately' : 'Admin access required'}</h2>
-          <p>
-            Customers cannot add product details, prices, categories, stock status, or descriptions. Only the owner can
-            unlock this dashboard and manage the catalog.
-          </p>
-          <div className="mini-steps">
-            <span>Private product upload</span>
-            <span>Price and stock control</span>
-            <span>Catalog saved locally</span>
-          </div>
-        </div>
+              <div className="card-info">
+                <span className="card-category">{product.category}</span>
+                <h3 onClick={() => setSelectedProduct(product)}>{product.name}</h3>
+                <p className="card-material">{product.material} • {product.dimensions}</p>
 
-        {!isAdmin ? (
-          <form className="studio-form admin-login" onSubmit={loginAdmin}>
-            <div className="admin-lock">
-              <LogIn size={28} />
-              <span>Owner login</span>
-            </div>
-            <label>
-              Owner email
-              <input
-                type="email"
-                value={adminForm.email}
-                onChange={(event) => setAdminForm({ ...adminForm, email: event.target.value })}
-                placeholder="owner@sainihandicrafts.com"
-              />
-            </label>
-            <label>
-              Owner passcode
-              <input
-                type="password"
-                value={adminForm.code}
-                onChange={(event) => setAdminForm({ ...adminForm, code: event.target.value })}
-                placeholder="Enter owner passcode"
-              />
-            </label>
-            <p className="helper-text">Demo owner ID: {ADMIN_EMAIL}<br />Demo password: {ADMIN_CODE}</p>
-            {adminError ? <p className="form-error">{adminError}</p> : null}
-            <button className="primary-button" type="submit">
-              <LogIn size={18} /> Unlock dashboard
-            </button>
-          </form>
-        ) : (
-          <form className="studio-form" onSubmit={addProduct}>
-            <div className="dashboard-topline">
-              <span>Owner mode is active</span>
-              <button className="ghost-pill" type="button" onClick={logoutAdmin}>
-                <LogOut size={16} /> Logout
-              </button>
-            </div>
-            <label className="upload-box">
-              <ImagePlus size={26} />
-              <span>{productForm.image ? 'Image selected' : 'Upload product image'}</span>
-              <input type="file" accept="image/*" onChange={handleImageUpload} />
-            </label>
-            {productForm.image ? <img className="image-preview" src={productForm.image} alt="Product preview" /> : null}
-            <div className="form-grid">
-              <label>
-                Product name
-                <input
-                  value={productForm.name}
-                  onChange={(event) => setProductForm({ ...productForm, name: event.target.value })}
-                  placeholder="Blue pottery diya set"
-                />
-              </label>
-              <label>
-                Price
-                <input
-                  min="0"
-                  type="number"
-                  value={productForm.price}
-                  onChange={(event) => setProductForm({ ...productForm, price: event.target.value })}
-                />
-              </label>
-            </div>
-            <div className="form-grid">
-              <label>
-                Category
-                <select
-                  value={productForm.category}
-                  onChange={(event) => setProductForm({ ...productForm, category: event.target.value })}
-                >
-                  <option>Ceramic Decor</option>
-                  <option>Textile Art</option>
-                  <option>Woodcraft</option>
-                  <option>Paper Craft</option>
-                  <option>Gift Hamper</option>
-                  <option>Wall Art</option>
-                </select>
-              </label>
-              <label>
-                Stock status
-                <select
-                  value={productForm.stock}
-                  onChange={(event) => setProductForm({ ...productForm, stock: event.target.value })}
-                >
-                  <option>Ready to ship</option>
-                  <option>Made to order</option>
-                  <option>Limited stock</option>
-                  <option>Sold out</option>
-                </select>
-              </label>
-            </div>
-            <div className="form-grid">
-              <label>
-                Customer mood
-                <select
-                  value={productForm.mood}
-                  onChange={(event) => setProductForm({ ...productForm, mood: event.target.value })}
-                >
-                  {moodFilters.filter((mood) => mood !== 'All').map((mood) => <option key={mood}>{mood}</option>)}
-                </select>
-              </label>
-              <label>
-                Material
-                <input
-                  value={productForm.material}
-                  onChange={(event) => setProductForm({ ...productForm, material: event.target.value })}
-                  placeholder="Terracotta clay"
-                />
-              </label>
-            </div>
-            <label>
-              Short description
-              <textarea
-                value={productForm.description}
-                onChange={(event) => setProductForm({ ...productForm, description: event.target.value })}
-                placeholder="Explain material, size, color, and what makes it special."
-              />
-            </label>
-            <label>
-              Craft story
-              <textarea
-                value={productForm.story}
-                onChange={(event) => setProductForm({ ...productForm, story: event.target.value })}
-                placeholder="Tell the user how this piece is made and why it is special."
-              />
-            </label>
-            <label>
-              Care instructions
-              <input
-                value={productForm.care}
-                onChange={(event) => setProductForm({ ...productForm, care: event.target.value })}
-                placeholder="Keep dry, wipe gently, avoid direct sunlight."
-              />
-            </label>
-            <button className="primary-button" type="submit">
-              <Save size={18} /> {editingProductId ? 'Update product' : 'Save product'}
-            </button>
-            <div className="admin-products">
-              <span>Added products</span>
-              {customProducts.length === 0 ? <p>No owner-added products yet.</p> : null}
-              {customProducts.map((product) => (
-                <div className="admin-product-line" key={product.id}>
-                  <span>{product.name}</span>
-                  <div>
-                    <button type="button" onClick={() => editProduct(product)} aria-label={`Edit ${product.name}`}>
-                      <Edit3 size={15} />
-                    </button>
-                    <button type="button" onClick={() => deleteProduct(product.id)} aria-label={`Delete ${product.name}`}>
-                      <Trash2 size={15} />
-                    </button>
+                <div className="card-price-row">
+                  <div className="price-group">
+                    <span className="current-price">Rs. {product.price.toLocaleString('en-IN')}</span>
+                    {product.originalPrice && (
+                      <span className="old-price">Rs. {product.originalPrice.toLocaleString('en-IN')}</span>
+                    )}
                   </div>
+                  <span className="stock-tag">{product.stock}</span>
                 </div>
-              ))}
+
+                <div className="card-action-row">
+                  <button className="btn-card-add" onClick={() => { updateCartQty(product.id, 1); showToast(`Added ${product.name} to cart`); }}>
+                    <ShoppingBag size={15} /> Add to Cart
+                  </button>
+                  <button className="btn-card-view" onClick={() => setSelectedProduct(product)}>
+                    Details <ArrowRight size={14} />
+                  </button>
+                </div>
+              </div>
             </div>
-          </form>
+          ))}
+        </div>
+
+        {filteredProducts.length === 0 && (
+          <div className="empty-catalog">
+            <Package size={40} />
+            <p>No products found matching your search. Try resetting filters.</p>
+            <button className="btn-secondary" onClick={() => { setActiveCategory('All'); setSearchTerm(''); }}>
+              Reset Filters
+            </button>
+          </div>
         )}
       </section>
 
-      <section className="account-panel" id="account">
-        <div>
-          <span className="eyebrow">user account</span>
-          <h2>{account ? `Welcome, ${account.name}` : 'Create a simple account'}</h2>
-          <p>
-            Customers can save their details, view basket items, and later this can become login, wishlist, order
-            history, address management, and delivery updates.
-          </p>
-        </div>
-        <form className="account-form" onSubmit={saveAccount}>
-          <div className="account-avatar">
-            <User size={36} />
-          </div>
-          <label>
-            Full name
-            <input
-              value={accountForm.name}
-              onChange={(event) => setAccountForm({ ...accountForm, name: event.target.value })}
-              placeholder="Customer name"
-            />
-          </label>
-          <label>
-            Email
-            <input
-              type="email"
-              value={accountForm.email}
-              onChange={(event) => setAccountForm({ ...accountForm, email: event.target.value })}
-              placeholder="name@example.com"
-            />
-          </label>
-          <label>
-            Phone
-            <input
-              value={accountForm.phone}
-              onChange={(event) => setAccountForm({ ...accountForm, phone: event.target.value })}
-              placeholder="+91 98765 43210"
-            />
-          </label>
-          <button className="primary-button" type="submit">
-            <LogIn size={18} /> Save account
-          </button>
-          <div className="wishlist-panel">
-            <span>Saved collections</span>
-            {wishlistCollections.map((collection) => (
-              <div key={collection}>
-                <strong>{collection}</strong>
-                <small>{(wishlist[collection] || []).length} saved</small>
+      {/* 6. Heritage Craft Story */}
+      <section className="heritage-section" id="heritage">
+        <div className="heritage-grid">
+          <div className="heritage-text">
+            <span className="section-eyebrow">authentic lineage</span>
+            <h2>Carved by hand. Preserved for generations.</h2>
+            <p>
+              At <strong>Saini Handicrafts</strong>, every piece originates from a slow, deliberate artisanal process. We specialize in live-edge seasoned hardwood chiseling, traditional repoussé metal embossing, and weathered patina stonework.
+            </p>
+            <div className="heritage-pillars">
+              <div className="pillar-item">
+                <span className="pillar-num">01</span>
+                <div>
+                  <strong>Live-Edge Hardwood Chiseling</strong>
+                  <p>Preserving natural wood knots, bark perimeters, and organic tree rings with organic oils.</p>
+                </div>
               </div>
-            ))}
-          </div>
-        </form>
-      </section>
-
-      <section className="custom-order" id="custom">
-        <div>
-          <span className="eyebrow">custom orders</span>
-          <h2>Build a gift box, decor set, or branded artisan hamper.</h2>
-        </div>
-        <form onSubmit={sendCustomRequest}>
-          <label>
-            Project type
-            <select>
-              <option>Home decor bundle</option>
-              <option>Wedding gifting</option>
-              <option>Corporate hamper</option>
-              <option>One-of-a-kind commission</option>
-            </select>
-          </label>
-          <label>
-            Budget range
-            <input type="text" placeholder="Rs. 5,000 - Rs. 25,000" />
-          </label>
-          <div className="form-grid">
-            <label>
-              Material preference
-              <select>
-                <option>Open to suggestions</option>
-                <option>Clay / ceramic</option>
-                <option>Textile</option>
-                <option>Wood</option>
-                <option>Paper craft</option>
-              </select>
-            </label>
-            <label>
-              Size
-              <select>
-                <option>Small</option>
-                <option>Medium</option>
-                <option>Large</option>
-                <option>Mixed hamper</option>
-              </select>
-            </label>
-          </div>
-          <label className="upload-box">
-            <ImagePlus size={22} />
-            <span>{customReference ? 'Reference image selected' : 'Upload reference image'}</span>
-            <input type="file" accept="image/*" onChange={handleReferenceUpload} />
-          </label>
-          {customReference ? <img className="image-preview" src={customReference} alt="Custom order reference" /> : null}
-          <label>
-            Your idea
-            <textarea placeholder="Tell us the mood, quantity, timeline, and materials you love." />
-          </label>
-          {requestSent ? (
-            <p className="success-note"><CheckCircle size={18} /> Request saved. We will contact the customer soon.</p>
-          ) : null}
-          <button className="primary-button" type="submit">
-            Send request <ArrowRight size={18} />
-          </button>
-        </form>
-      </section>
-
-      {cartOpen ? (
-        <div className="drawer-backdrop" role="dialog" aria-modal="true" aria-label="Shopping cart">
-          <aside className="cart-drawer">
-            <div className="modal-heading">
-              <div>
-                <span className="eyebrow">cart drawer</span>
-                <h2>Your basket</h2>
+              <div className="pillar-item">
+                <span className="pillar-num">02</span>
+                <div>
+                  <strong>Repoussé Brass Relief</strong>
+                  <p>Hand-hammered brass sheets yielding 3D depth and antique burnished highlights.</p>
+                </div>
               </div>
-              <button className="icon-button" aria-label="Close cart" onClick={() => setCartOpen(false)}>
-                <X size={18} />
-              </button>
+              <div className="pillar-item">
+                <span className="pillar-num">03</span>
+                <div>
+                  <strong>Patina Finishing & Inspection</strong>
+                  <p>Natural lacquers and protective seals ensure enduring beauty without chemical peeling.</p>
+                </div>
+              </div>
             </div>
-            <div className="drawer-items">
-              {Object.entries(cart).map(([id, qty]) => (
-                productById[id] ? (
-                  <div className="drawer-item" key={id}>
-                    <img src={productById[id].image} alt="" />
-                    <div>
-                      <strong>{productById[id].name}</strong>
-                      <span>Rs. {productById[id].price.toLocaleString('en-IN')}</span>
-                      <div className="stepper">
-                        <button onClick={() => updateCart(id, -1)}><Minus size={15} /></button>
+          </div>
+
+          <div className="heritage-image-box">
+            <img src={assetPath('products/live-edge-clock.jpg')} alt="Live Edge Teak Clock Craftsmanship" />
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Custom Commissions & Inquiries */}
+      <section className="custom-section" id="custom">
+        <div className="custom-container">
+          <div className="section-head">
+            <span className="section-eyebrow">bespoke commissions</span>
+            <h2>Commission a Custom Artisan Piece</h2>
+            <p>Looking for a custom-sized brass mural, live-edge tabletop, temple backdrop, or corporate gifting? Contact our master atelier directly.</p>
+          </div>
+
+          {commissionSubmitted ? (
+            <div className="commission-success">
+              <CheckCircle size={44} />
+              <h3>Commission Request Received</h3>
+              <p>Our workshop team will review your requirements and connect with you on WhatsApp / Phone within 24 hours.</p>
+              <button className="btn-secondary" onClick={() => setCommissionSubmitted(false)}>Submit Another Inquiry</button>
+            </div>
+          ) : (
+            <form className="custom-form-clean" onSubmit={(e) => { e.preventDefault(); setCommissionSubmitted(true); }}>
+              <div className="form-two-col">
+                <label>
+                  Your Name
+                  <input
+                    required
+                    placeholder="e.g. Pankaj Saini"
+                    value={customCommission.name}
+                    onChange={(e) => setCustomCommission({ ...customCommission, name: e.target.value })}
+                  />
+                </label>
+                <label>
+                  WhatsApp / Phone Number
+                  <input
+                    required
+                    placeholder="+91 98765 43210"
+                    value={customCommission.phone}
+                    onChange={(e) => setCustomCommission({ ...customCommission, phone: e.target.value })}
+                  />
+                </label>
+              </div>
+
+              <div className="form-two-col">
+                <label>
+                  Commission Category
+                  <select
+                    value={customCommission.type}
+                    onChange={(e) => setCustomCommission({ ...customCommission, type: e.target.value })}
+                  >
+                    <option>Custom Brass Wall Mural</option>
+                    <option>Live-Edge Wood Wall Clock / Slab</option>
+                    <option>Sacred Sculptures & Mandir Panels</option>
+                    <option>Wedding Return Gifts (50+ units)</option>
+                    <option>Corporate Festival Hampers</option>
+                  </select>
+                </label>
+                <label>
+                  Preferred Dimension / Material
+                  <input placeholder="e.g. 24x24 inches in Antique Brass" />
+                </label>
+              </div>
+
+              <label>
+                Specific Requirements / Inscription Details
+                <textarea
+                  rows={4}
+                  placeholder="Describe your space, required finish, timeframe, or specific inscriptions..."
+                  value={customCommission.details}
+                  onChange={(e) => setCustomCommission({ ...customCommission, details: e.target.value })}
+                  required
+                />
+              </label>
+
+              <button className="btn-primary" type="submit">
+                <Send size={16} /> Send Commission Inquiry
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+
+      {/* 8. Slide-Out Cart Drawer */}
+      {cartOpen && (
+        <div className="drawer-overlay" onClick={() => setCartOpen(false)}>
+          <aside className="drawer-panel" onClick={(e) => e.stopPropagation()}>
+            <div className="drawer-head">
+              <div>
+                <span className="section-eyebrow">shopping basket</span>
+                <h3>Your Selections ({cartItemCount})</h3>
+              </div>
+              <button className="btn-icon" onClick={() => setCartOpen(false)}><X size={18} /></button>
+            </div>
+
+            <div className="drawer-body">
+              {Object.entries(cart).map(([id, qty]) => {
+                const item = productMap[id];
+                if (!item) return null;
+                return (
+                  <div className="cart-item-row" key={id}>
+                    <img src={item.image} alt={item.name} />
+                    <div className="cart-item-meta">
+                      <strong>{item.name}</strong>
+                      <span className="cart-item-price">Rs. {item.price.toLocaleString('en-IN')}</span>
+                      <div className="qty-stepper">
+                        <button onClick={() => updateCartQty(id, -1)}><Minus size={13} /></button>
                         <span>{qty}</span>
-                        <button onClick={() => updateCart(id, 1)}><Plus size={15} /></button>
+                        <button onClick={() => updateCartQty(id, 1)}><Plus size={13} /></button>
                       </div>
                     </div>
                   </div>
-                ) : null
-              ))}
+                );
+              })}
+
+              {cartItemCount === 0 && (
+                <div className="empty-cart-msg">
+                  <ShoppingBag size={36} />
+                  <p>Your basket is currently empty.</p>
+                </div>
+              )}
             </div>
-            <div className="coupon-row">
-              <input value={coupon} onChange={(event) => setCoupon(event.target.value)} placeholder="Coupon code SAINI10" />
-              <button className="ghost-pill" onClick={applyCoupon}>Apply</button>
-            </div>
-            {couponApplied ? <p className="success-note"><CheckCircle size={18} /> 10% coupon applied</p> : null}
-            <div className="cart-total">
-              <span>Total</span>
-              <strong>Rs. {payableTotal.toLocaleString('en-IN')}</strong>
-            </div>
-            <a className="ghost-button whatsapp-button" href={whatsAppUrl} target="_blank" rel="noreferrer">
-              WhatsApp order
-            </a>
-            <button className="primary-button" onClick={() => {
-              setCartOpen(false);
-              setCheckoutOpen(true);
-            }}>
-              Checkout <ArrowRight size={18} />
-            </button>
+
+            {cartItemCount > 0 && (
+              <div className="drawer-foot">
+                <div className="promo-box">
+                  <input
+                    type="text"
+                    placeholder="Coupon: SAINI10"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value)}
+                  />
+                  <button onClick={applyPromo}>Apply</button>
+                </div>
+
+                {couponApplied && (
+                  <div className="promo-applied-tag">
+                    <CheckCircle size={14} /> 10% discount applied (-Rs. {discount.toLocaleString('en-IN')})
+                  </div>
+                )}
+
+                <div className="cart-summary-line">
+                  <span>Subtotal:</span>
+                  <span>Rs. {subtotal.toLocaleString('en-IN')}</span>
+                </div>
+                {couponApplied && (
+                  <div className="cart-summary-line discount">
+                    <span>Artisan Promo:</span>
+                    <span>-Rs. {discount.toLocaleString('en-IN')}</span>
+                  </div>
+                )}
+                <div className="cart-summary-line total">
+                  <strong>Total Payable:</strong>
+                  <strong>Rs. {finalTotal.toLocaleString('en-IN')}</strong>
+                </div>
+
+                <a className="btn-whatsapp" href={`https://wa.me/?text=${whatsAppOrderText}`} target="_blank" rel="noreferrer">
+                  <MessageCircle size={18} /> Quick Order on WhatsApp
+                </a>
+
+                <button
+                  className="btn-primary full-width"
+                  onClick={() => {
+                    setCartOpen(false);
+                    setCheckoutOpen(true);
+                  }}
+                >
+                  Proceed to Checkout <ArrowRight size={16} />
+                </button>
+              </div>
+            )}
           </aside>
         </div>
-      ) : null}
+      )}
 
-      {checkoutOpen ? (
-        <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label="Checkout">
-          <section className="checkout-modal">
-            <div className="modal-heading">
-              <div>
-                <span className="eyebrow">checkout</span>
-                <h2>{checkoutDone ? 'Order request received' : 'Complete your order'}</h2>
-              </div>
-              <button className="icon-button" aria-label="Close checkout" onClick={() => setCheckoutOpen(false)}>
-                <X size={18} />
-              </button>
+      {/* 9. Product Details Modal */}
+      {selectedProduct && (
+        <div className="modal-overlay" onClick={() => setSelectedProduct(null)}>
+          <div className="product-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="btn-icon modal-close" onClick={() => setSelectedProduct(null)}><X size={18} /></button>
+
+            <div className="modal-gallery">
+              <img src={selectedProduct.image} alt={selectedProduct.name} />
             </div>
 
-            {checkoutDone ? (
-              <div className="checkout-success">
-                <CheckCircle size={46} />
-                <p>
-                  This demo has saved the checkout request. Your order ID is SH-2026-1042 and tracking is now visible.
-                </p>
-                <div className="tracking-strip">
-                  <span className="done">Placed</span>
-                  <span>Craft check</span>
-                  <span>Packed</span>
-                  <span>Shipped</span>
-                </div>
-                <div className="order-journey">
-                  <div className="journey-step active">
-                    <strong>Order placed</strong>
-                    <span>Request received with customer details.</span>
-                  </div>
-                  <div className="journey-step">
-                    <strong>Maker check</strong>
-                    <span>Owner confirms stock, finish, and packaging.</span>
-                  </div>
-                  <div className="journey-step">
-                    <strong>Careful packing</strong>
-                    <span>Gift wrap, care card, and invoice are prepared.</span>
-                  </div>
-                  <div className="journey-step">
-                    <strong>Delivery</strong>
-                    <span>Tracking link and WhatsApp update are sent.</span>
-                  </div>
-                </div>
-                <div className="certificate-card">
-                  <span>Authenticity certificate</span>
-                  <h3>{certificateProduct?.name}</h3>
-                  <p>Material: {certificateProduct?.material || 'Handmade craft'}</p>
-                  <p>Maker note: Made or curated by Saini Handicrafts in a small-batch craft process.</p>
-                  <small>Certificate ID: SH-CERT-1042</small>
-                </div>
-                <button className="ghost-button" onClick={() => window.print()}>
-                  <FileText size={18} /> Print invoice
+            <div className="modal-details">
+              <span className="section-eyebrow">{selectedProduct.category}</span>
+              <h2>{selectedProduct.name}</h2>
+
+              <div className="modal-price-box">
+                <span className="modal-price">Rs. {selectedProduct.price.toLocaleString('en-IN')}</span>
+                {selectedProduct.originalPrice && (
+                  <span className="modal-old-price">Rs. {selectedProduct.originalPrice.toLocaleString('en-IN')}</span>
+                )}
+                <span className="modal-stock">{selectedProduct.stock}</span>
+              </div>
+
+              <div className="modal-specs">
+                <div><strong>Material:</strong> <span>{selectedProduct.material}</span></div>
+                <div><strong>Dimensions:</strong> <span>{selectedProduct.dimensions}</span></div>
+                <div><strong>Care:</strong> <span>{selectedProduct.care}</span></div>
+                <div><strong>Origin:</strong> <span>Saini Handicrafts Atelier, Rajasthan</span></div>
+              </div>
+
+              <div className="modal-narrative">
+                <strong>Artisan Craftsmanship</strong>
+                <p>{selectedProduct.story}</p>
+              </div>
+
+              <div className="modal-buttons">
+                <button
+                  className="btn-primary"
+                  onClick={() => {
+                    updateCartQty(selectedProduct.id, 1);
+                    setSelectedProduct(null);
+                    setCartOpen(true);
+                  }}
+                >
+                  <ShoppingBag size={17} /> Add to Cart
                 </button>
-                <button className="primary-button" onClick={() => setCheckoutOpen(false)}>
-                  Continue shopping
-                </button>
+                <a
+                  className="btn-whatsapp"
+                  href={`https://wa.me/?text=${encodeURIComponent(`Hello Saini Handicrafts, I want to inquire about "${selectedProduct.name}" (Price: Rs. ${selectedProduct.price}).`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <MessageCircle size={17} /> WhatsApp Inquiry
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 10. Checkout & Confirmation Modal */}
+      {checkoutOpen && (
+        <div className="modal-overlay" onClick={() => setCheckoutOpen(false)}>
+          <div className="checkout-dialog" onClick={(e) => e.stopPropagation()}>
+            <button className="btn-icon modal-close" onClick={() => setCheckoutOpen(false)}><X size={18} /></button>
+
+            {checkoutSuccess ? (
+              <div className="order-confirmed-view">
+                <CheckCircle size={54} className="confirm-icon" />
+                <h2>Order Confirmed!</h2>
+                <p>Order ID: <strong>SH-2026-8819</strong>. Your authentic handicraft order is being packaged with utmost care.</p>
+
+                <div className="cert-preview">
+                  <div className="cert-badge"><Sparkles size={14} /> Certificate of Authenticity</div>
+                  <h4>Saini Handicrafts Original Commission</h4>
+                  <p>Certified genuine handmade piece crafted with traditional methods.</p>
+                  <small>Serial: SH-CERT-2026-8819</small>
+                </div>
+
+                <div className="checkout-btn-group">
+                  <button className="btn-secondary" onClick={() => window.print()}>
+                    <Printer size={16} /> Print Order Receipt
+                  </button>
+                  <a className="btn-whatsapp" href={`https://wa.me/?text=${whatsAppOrderText}`} target="_blank" rel="noreferrer">
+                    <MessageCircle size={16} /> Send Order Copy to WhatsApp
+                  </a>
+                </div>
               </div>
             ) : (
-              <form onSubmit={submitCheckout}>
-                <div className="cart-list">
-                  {Object.entries(cart).map(([id, qty]) => (
-                    productById[id] ? (
-                      <div className="cart-line" key={id}>
-                        <span>{productById[id].name}</span>
-                        <strong>{qty} x Rs. {productById[id].price.toLocaleString('en-IN')}</strong>
-                      </div>
-                    ) : null
-                  ))}
+              <form className="checkout-form-view" onSubmit={(e) => { e.preventDefault(); setCheckoutSuccess(true); }}>
+                <h2>Finalize Delivery</h2>
+                <div className="order-brief">
+                  <span>Items: {cartItemCount}</span>
+                  <strong>Total: Rs. {finalTotal.toLocaleString('en-IN')}</strong>
                 </div>
-                <div className="cart-total">
-                  <span>Total</span>
-                  <strong>Rs. {payableTotal.toLocaleString('en-IN')}</strong>
-                </div>
+
                 <label>
-                  Delivery address
-                  <textarea placeholder="House number, street, city, pincode" />
+                  Full Name
+                  <input
+                    required
+                    value={checkoutData.name}
+                    onChange={(e) => setCheckoutData({ ...checkoutData, name: e.target.value })}
+                  />
                 </label>
                 <label>
-                  Payment method
-                  <select>
-                    <option>Cash on delivery</option>
-                    <option>UPI payment request</option>
-                    <option>Card payment later</option>
+                  Contact Number (WhatsApp enabled)
+                  <input
+                    required
+                    value={checkoutData.phone}
+                    onChange={(e) => setCheckoutData({ ...checkoutData, phone: e.target.value })}
+                  />
+                </label>
+                <label>
+                  Delivery Address & Pincode
+                  <textarea
+                    required
+                    rows={3}
+                    value={checkoutData.address}
+                    onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
+                  />
+                </label>
+                <label>
+                  Payment Preference
+                  <select
+                    value={checkoutData.paymentMethod}
+                    onChange={(e) => setCheckoutData({ ...checkoutData, paymentMethod: e.target.value })}
+                  >
+                    <option>Cash on Delivery (COD)</option>
+                    <option>UPI QR Code (Google Pay / PhonePe)</option>
+                    <option>Direct Bank Transfer / NEFT</option>
                   </select>
                 </label>
-                <button className="primary-button" type="submit">
-                  <CreditCard size={18} /> Place demo order
+
+                <button className="btn-primary full-width" type="submit">
+                  <CreditCard size={17} /> Confirm Order (Rs. {finalTotal.toLocaleString('en-IN')})
                 </button>
               </form>
             )}
-          </section>
+          </div>
         </div>
-      ) : null}
+      )}
 
-      {selectedProduct ? (
-        <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label={`${selectedProduct.name} story`}>
-          <section className="story-drawer">
-            <button className="icon-button drawer-close" aria-label="Close product story" onClick={() => setSelectedProduct(null)}>
-              <X size={18} />
-            </button>
-            <div className="story-gallery">
-              <img src={activeGalleryImage || selectedProduct.image} alt={selectedProduct.name} />
-              <div>
-                {[selectedProduct.image, '/assets/artisan-hero.png'].map((image) => (
-                  <button key={image} onClick={() => setActiveGalleryImage(image)}>
-                    <img src={image} alt="" />
+      {/* 11. Owner Admin Portal Modal */}
+      {adminModalOpen && (
+        <div className="modal-overlay" onClick={() => setAdminModalOpen(false)}>
+          <div className="admin-dialog" onClick={(e) => e.stopPropagation()}>
+            <button className="btn-icon modal-close" onClick={() => setAdminModalOpen(false)}><X size={18} /></button>
+
+            {!isAdmin ? (
+              <form className="admin-login-box" onSubmit={handleAdminLogin}>
+                <div className="admin-icon-center"><Lock size={32} /></div>
+                <h2>Owner Authentication</h2>
+                <p>Log in to manage product listings, pricing, and stock.</p>
+
+                <label>
+                  Owner Email
+                  <input
+                    type="email"
+                    required
+                    placeholder="owner@sainihandicrafts.com"
+                    value={adminEmail}
+                    onChange={(e) => setAdminEmail(e.target.value)}
+                  />
+                </label>
+                <label>
+                  Passcode
+                  <input
+                    type="password"
+                    required
+                    placeholder="Enter owner passcode"
+                    value={adminCode}
+                    onChange={(e) => setAdminCode(e.target.value)}
+                  />
+                </label>
+
+                <div className="admin-demo-creds">
+                  <span>Demo Email: <strong>{ADMIN_EMAIL}</strong></span>
+                  <span>Demo Passcode: <strong>{ADMIN_CODE}</strong></span>
+                </div>
+
+                {adminError && <p className="error-text">{adminError}</p>}
+
+                <button className="btn-primary full-width" type="submit">
+                  <LogIn size={16} /> Log In to Dashboard
+                </button>
+              </form>
+            ) : (
+              <div className="admin-dashboard-view">
+                <div className="admin-dash-head">
+                  <div>
+                    <span className="status-badge"><CheckCircle size={14} /> Logged in as Owner</span>
+                    <h3>Product Catalog Manager</h3>
+                  </div>
+                  <button className="btn-secondary btn-sm" onClick={handleAdminLogout}>
+                    <LogOut size={14} /> Logout
                   </button>
-                ))}
+                </div>
+
+                <form className="admin-add-form" onSubmit={handleProductSubmit}>
+                  <h4>{editingId ? 'Edit Product Listing' : 'Add New Handcrafted Product'}</h4>
+                  <div className="form-two-col">
+                    <label>
+                      Title
+                      <input
+                        required
+                        placeholder="e.g. Vintage Brass Ganesh Mural"
+                        value={productForm.name}
+                        onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
+                      />
+                    </label>
+                    <label>
+                      Price (Rs.)
+                      <input
+                        type="number"
+                        required
+                        value={productForm.price}
+                        onChange={(e) => setProductForm({ ...productForm, price: e.target.value })}
+                      />
+                    </label>
+                  </div>
+
+                  <div className="form-two-col">
+                    <label>
+                      Category
+                      <select
+                        value={productForm.category}
+                        onChange={(e) => setProductForm({ ...productForm, category: e.target.value })}
+                      >
+                        <option>Wall Decor</option>
+                        <option>Woodcraft</option>
+                        <option>Sculptural Art</option>
+                      </select>
+                    </label>
+                    <label>
+                      Stock Status
+                      <select
+                        value={productForm.stock}
+                        onChange={(e) => setProductForm({ ...productForm, stock: e.target.value })}
+                      >
+                        <option>Ready to ship</option>
+                        <option>Made to order</option>
+                        <option>Only 2 left</option>
+                        <option>Limited Edition</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <label>
+                    Material & Dimensions
+                    <input
+                      placeholder="e.g. Solid Teak Wood • 14 x 10 inches"
+                      value={productForm.material}
+                      onChange={(e) => setProductForm({ ...productForm, material: e.target.value })}
+                    />
+                  </label>
+
+                  <label>
+                    Description & Craft Story
+                    <textarea
+                      rows={3}
+                      placeholder="Explain how this piece was crafted and its key features..."
+                      value={productForm.story}
+                      onChange={(e) => setProductForm({ ...productForm, story: e.target.value })}
+                    />
+                  </label>
+
+                  <button className="btn-primary" type="submit">
+                    <Save size={16} /> {editingId ? 'Update Product' : 'Publish Product to Store'}
+                  </button>
+                </form>
+
+                {customProducts.length > 0 && (
+                  <div className="admin-product-list">
+                    <h4>Owner Added Products ({customProducts.length})</h4>
+                    {customProducts.map((p) => (
+                      <div className="admin-prod-row" key={p.id}>
+                        <div>
+                          <strong>{p.name}</strong>
+                          <small>Rs. {p.price.toLocaleString('en-IN')} • {p.category}</small>
+                        </div>
+                        <div className="row-actions">
+                          <button onClick={() => { setEditingId(p.id); setProductForm(p); }}><Edit3 size={15} /></button>
+                          <button onClick={() => setCustomProducts((prev) => prev.filter((x) => x.id !== p.id))}><Trash2 size={15} /></button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
-            <div>
-              <span className="eyebrow">{selectedProduct.mood || 'handmade piece'}</span>
-              <h2>{selectedProduct.name}</h2>
-              <p>{selectedProduct.story}</p>
-              <div className="story-facts">
-                <span>Material: {selectedProduct.material || 'Handmade craft'}</span>
-                <span>Status: {selectedProduct.stock}</span>
-                <span>Price: Rs. {selectedProduct.price.toLocaleString('en-IN')}</span>
-                <span>Care: {selectedProduct.care || 'Handle gently and keep dry.'}</span>
-                <span>Rating: 4.8/5 from handmade buyers</span>
-              </div>
-              <button className="primary-button" onClick={() => updateCart(selectedProduct.id, 1)}>
-                Add one to basket <Plus size={18} />
-              </button>
-              <button className="ghost-button" onClick={() => saveWishlist(selectedProduct)}>
-                Save to wishlist <Heart size={18} />
-              </button>
-            </div>
-          </section>
+            )}
+          </div>
         </div>
-      ) : null}
+      )}
 
-      {wishlistNote ? <div className="toast">{wishlistNote}</div> : null}
+      {/* 12. Floating Toast */}
+      {toastMessage && <div className="site-toast">{toastMessage}</div>}
 
-      <footer>
-        <button className="icon-button" aria-label="Previous collection">
-          <ChevronLeft size={19} />
-        </button>
-        <p>Saini Handicrafts - Handmade marketplace concept</p>
-        <button className="icon-button" aria-label="Next collection">
-          <ChevronRight size={19} />
-        </button>
+      {/* 13. Clean Luxury Footer */}
+      <footer className="footer" id="contact">
+        <div className="footer-grid">
+          <div className="footer-col-main">
+            <div className="logo light">
+              <span className="logo-badge">SH</span>
+              <div>
+                <span className="logo-title">SAINI HANDICRAFTS</span>
+                <span className="logo-sub">Artisan Atelier • Rajasthan</span>
+              </div>
+            </div>
+            <p className="footer-about">
+              Celebrating authentic Indian craftsmanship. Hand-chiseled live edge woodwork, repoussé brass murals,
+              and sculpted heritage treasures crafted by master artisans in Rajasthan.
+            </p>
+          </div>
+
+          <div className="footer-col">
+            <h4>Quick Navigation</h4>
+            <a href="#collection">Collection</a>
+            <a href="#heritage">Craft Heritage</a>
+            <a href="#custom">Custom Commissions</a>
+            <button className="link-button" onClick={() => setAdminModalOpen(true)}>Owner Portal</button>
+          </div>
+
+          <div className="footer-col">
+            <h4>Workshop & Inquiries</h4>
+            <p><MapPin size={15} /> Jaipur & Alwar, Rajasthan, India</p>
+            <p><Phone size={15} /> WhatsApp / Phone: +91 98765 43210</p>
+            <p><Sparkles size={15} /> 100% Genuine Handmade Quality</p>
+          </div>
+        </div>
+
+        <div className="footer-bottom-bar">
+          <p>© {new Date().getFullYear()} Saini Handicrafts. All rights reserved.</p>
+          <p>Handmade with pride in Rajasthan • Free GitHub Pages Ready</p>
+        </div>
       </footer>
-    </main>
+    </div>
   );
 }
 

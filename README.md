@@ -1,84 +1,75 @@
-# Saini Handicrafts
+# Saini Handicrafts — Authentic Handmade Marketplace & Custom Indian Crafts
 
-A modern handmade craft storefront concept built from scratch after reviewing three open-source ecommerce references:
+A modern, high-craft e-commerce storefront showcasing authentic handmade Indian handicrafts: live-edge teak wood clocks, antique brass wall murals, folk terracotta totems, spiritual sculptures, and bespoke artisan gifting.
 
-- `refs/gocart` for marketplace structure and vendor/admin direction
-- `refs/commerce` for polished commerce patterns
-- `refs/supply` for lightweight creator-shop simplicity
+## 🏺 Live Demo
 
-The app is intentionally a clean new project so it can become its own brand instead of a direct copy of any template.
+👉 **[https://pankaj2816.github.io/saini-handicrafts/](https://pankaj2816.github.io/saini-handicrafts/)**
 
-## Run
+---
+
+## 🌟 Authentic Handicraft Collection
+
+The storefront features original artisan pieces:
+1. **Rustic Live-Edge Teak Wall Clock** — Natural tree bark perimeter, seasoned wood grain, vintage brass hands.
+2. **Kalpavriksha Tree of Life Brass Mural** — Hand-embossed antique brass bas-relief wall art plaque with aerial roots.
+3. **Tribal Heritage Totem Columns (Set of 3)** — Traditional cylindrical terracotta/wood folk facial iconography.
+4. **Serene Dhyana Buddha Wall Sculpture** — Cast stone with weathered antique bronze patina.
+5. **Botanical Triptych Wall Panels (Set of 3)** — Embossed metallic palm & banyan framed relief art.
+6. **Royal Shahi Sawari Heritage Relief Plaque** — Panoramic Rajasthani royal elephant procession mural.
+7. **Hexagonal Trike Wooden Planter Cart** — Solid wood tricycle planter for bonsai and micro-greens.
+8. **Hand-Carved Leaf Motif Keepsake Box** — Solid wood treasure box with relief leaf engraving.
+
+---
+
+## 🛠️ Key Features
+
+- **Artisan Product Catalog**: Filter by Category (Wall Decor, Woodcraft, Sculptural Art, etc.), Atmospheric Mood, Material, and Price.
+- **Product Story & Gallery Modal**: High-res multi-angle photography, maker techniques, exact dimensions, care instructions, and stock badges.
+- **Interactive Room Styler**: Space-based recommender for Living Room, Mandir / Puja Corner, Dining Hall, Entryway Foyer, and Study.
+- **Festive & Occasion Gifting Hub**: Curated gifting suites for Diwali, Royal Indian Weddings, Griha Pravesh (Housewarming), and Corporate Gifts.
+- **Creative Shopping Lab**: Moodboard builder, small-batch release countdown, budget slider, handwritten gift note preview, and side-by-side spec comparison.
+- **Gift Box Builder**: Select multiple handcrafted items, choose bespoke packaging styles (Kraft, Terracotta, Velvet), and add greeting cards.
+- **Custom Artisan Commissions**: Request bespoke sizes, materials, wedding favors, or corporate hampers with reference image upload.
+- **Artisan Owner Portal (Admin)**:
+  - Owner Email: `owner@sainihandicrafts.com`
+  - Passcode: `SAINI-ADMIN`
+  - Add new products with file upload, edit/delete existing pieces, manage stock, and persist to browser storage.
+- **Seamless Cart & Checkout Journey**:
+  - 10% Coupon code: `SAINI10`
+  - Full order review with Cash on Delivery, UPI QR, and Bank Transfer options
+  - Authenticity Certificate generation (`SH-CERT-2026-XXXX`)
+  - Printable invoice and direct **WhatsApp Order Handoff** integration.
+
+---
+
+## 🚀 Running Locally
 
 ```bash
+# 1. Install dependencies
 npm install
+
+# 2. Run local development server
 npm run dev
+
+# 3. Build for production (GitHub Pages)
+npm run build
 ```
 
-## Live Demo
+---
 
-https://pankaj2816.github.io/saini-handicrafts/
+## 🌐 Free GitHub Pages Deployment
 
-## Current Features
+The repository includes a configured GitHub Actions workflow (`.github/workflows/deploy.yml`).
 
-- Creative handmade storefront homepage
-- Product collection with quantity steppers
-- Advanced cart drawer with coupon code `SAINI10`
-- Admin-gated owner panel to add products with image, category, price, stock, and description
-- Admin edit/delete for owner-added products
-- Demo user account form saved in the browser
-- Wishlist collection counts
-- Personalized discovery quiz
-- Craft Your Room space-based recommender
-- Color mood shopping with product recommendations
-- Festival collection mode for Diwali, Wedding, Rakhi, and Corporate gifting
-- Before/after styling preview
-- Interactive maker/workshop map
-- Surprise Me recommendation in the gift finder
-- Creative shopping lab with style board
-- Craft drop countdown and reminder
-- Budget curator
-- Handwritten gift note preview
-- Product comparison table
-- Gift finder and gift box builder
-- Packaging preview inside the gift box builder
-- Product quick-view story drawer with gallery, care, rating, and add-to-cart
-- Custom order form with material, size, and reference image upload
-- Checkout demo with live order journey, authenticity certificate, invoice print, and WhatsApp order handoff
-- Maker story section
-- Category browsing blocks
-- Custom order request form
-- Original generated hero asset in `public/assets/artisan-hero.png`
-- Client-readiness pass removed older duplicate visible sections in favor of cart drawer, maker map, product stories, and advanced discovery flows.
-
-## Easy Owner Workflow
-
-1. Open the website.
-2. Go to `Admin`.
-3. Enter the demo owner ID and password:
-   - Owner ID: `owner@sainihandicrafts.com`
-   - Password: `SAINI-ADMIN`
-4. Upload a product image.
-5. Add product name, price, category, stock status, and short description.
-6. Press `Save product`.
-
-For now this is a front-end demo and saves in browser storage for testing. A real store should later connect this to secure backend authentication, a database, and image storage so customers cannot bypass owner permissions.
-
-## Demo Interactions
-
-- Search icon opens a product search bar.
-- Cart icon opens the checkout dialog.
-- `Continue to checkout` opens the same checkout dialog.
-- `Rooms` opens the room-based styling recommender.
-- `Colors` opens color mood shopping.
-- `Lab` opens style board, drop countdown, budget curator, gift note preview, and product comparison.
-- `Gift Box` lets users select products, packaging, and greeting note.
-- `Surprise me` opens a random product story from the gift finder.
-- `Send request` saves a custom-order request confirmation.
-
-## Verification
-
-- `npm run build`
-- Local response check at `http://127.0.0.1:5173`
-- Static smoke check for all major feature labels
-- Stale duplicate selector check for removed sections
+To deploy automatically:
+1. Push your changes to the `main` branch:
+   ```bash
+   git add .
+   git commit -m "Add authentic product collection and UI polish"
+   git push origin main
+   ```
+2. In your GitHub repository settings:
+   - Go to **Settings** > **Pages**.
+   - Set **Source** to **GitHub Actions**.
+3. The site will automatically build and publish to `https://pankaj2816.github.io/saini-handicrafts/` for free!
