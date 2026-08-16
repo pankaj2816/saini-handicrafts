@@ -6,16 +6,9 @@ import {
   CheckCircle,
   Clock,
   CreditCard,
-  Edit3,
   ExternalLink,
   Eye,
-  FileText,
   Heart,
-  ImagePlus,
-  Info,
-  Lock,
-  LogIn,
-  LogOut,
   MapPin,
   Menu,
   MessageCircle,
@@ -24,19 +17,13 @@ import {
   Phone,
   Plus,
   Printer,
-  RotateCcw,
-  Save,
   Search,
   Send,
-  Share2,
   ShieldCheck,
   ShoppingBag,
   SlidersHorizontal,
   Sparkles,
-  Star,
-  Trash2,
   Truck,
-  User,
   X
 } from 'lucide-react';
 import './styles.css';
@@ -175,19 +162,8 @@ const initialProducts = [
 ];
 
 const categories = ['All', 'Wall Decor', 'Woodcraft', 'Sculptural Art'];
-const ADMIN_CODE = 'SAINI-ADMIN';
-const ADMIN_EMAIL = 'owner@sainihandicrafts.com';
-
-function getStoredProducts() {
-  try {
-    return JSON.parse(localStorage.getItem('saini_custom_products')) || [];
-  } catch {
-    return [];
-  }
-}
 
 function App() {
-  const [customProducts, setCustomProducts] = useState(getStoredProducts);
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
@@ -207,32 +183,9 @@ function App() {
     name: '',
     phone: '',
     type: 'Brass Wall Mural',
-    details: '',
-    reference: ''
+    details: ''
   });
   const [commissionSubmitted, setCommissionSubmitted] = useState(false);
-
-  // Owner Admin States
-  const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem('saini_admin_logged') === 'true');
-  const [adminModalOpen, setAdminModalOpen] = useState(false);
-  const [adminEmail, setAdminEmail] = useState('');
-  const [adminCode, setAdminCode] = useState('');
-  const [adminError, setAdminError] = useState('');
-  const [productForm, setProductForm] = useState({
-    name: '',
-    category: 'Wall Decor',
-    price: 2999,
-    originalPrice: 3599,
-    badge: 'New Arrival',
-    stock: 'Ready to ship',
-    material: 'Brass / Wood',
-    dimensions: '12" x 12"',
-    care: 'Dust with soft dry cloth.',
-    story: '',
-    description: '',
-    image: ''
-  });
-  const [editingId, setEditingId] = useState('');
 
   // Checkout Form
   const [checkoutData, setCheckoutData] = useState({
@@ -242,7 +195,7 @@ function App() {
     paymentMethod: 'Cash on Delivery (COD)'
   });
 
-  const allProducts = useMemo(() => [...initialProducts, ...customProducts], [customProducts]);
+  const allProducts = initialProducts;
 
   const filteredProducts = useMemo(() => {
     let result = allProducts.filter((item) => {
@@ -268,10 +221,6 @@ function App() {
   const discount = couponApplied ? Math.round(subtotal * 0.1) : 0;
   const finalTotal = Math.max(subtotal - discount, 0);
 
-  useEffect(() => {
-    localStorage.setItem('saini_custom_products', JSON.stringify(customProducts));
-  }, [customProducts]);
-
   const showToast = (msg) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(''), 2500);
@@ -288,61 +237,6 @@ function App() {
       }
       return next;
     });
-  };
-
-  const handleAdminLogin = (e) => {
-    e.preventDefault();
-    if (adminEmail.trim().toLowerCase() === ADMIN_EMAIL && adminCode.trim() === ADMIN_CODE) {
-      setIsAdmin(true);
-      setAdminError('');
-      localStorage.setItem('saini_admin_logged', 'true');
-      showToast('Welcome back, Saini Handicrafts Owner!');
-    } else {
-      setAdminError('Invalid email or passcode. Use the demo credentials provided.');
-    }
-  };
-
-  const handleAdminLogout = () => {
-    setIsAdmin(false);
-    localStorage.removeItem('saini_admin_logged');
-    showToast('Logged out of Owner Dashboard');
-  };
-
-  const handleProductSubmit = (e) => {
-    e.preventDefault();
-    if (!productForm.name.trim()) return;
-
-    const newProd = {
-      ...productForm,
-      id: editingId || `custom-${Date.now()}`,
-      maker: 'Saini Handicrafts',
-      price: Number(productForm.price) || 0,
-      originalPrice: Number(productForm.originalPrice) || Number(productForm.price) * 1.25
-    };
-
-    if (editingId) {
-      setCustomProducts((prev) => prev.map((p) => (p.id === editingId ? newProd : p)));
-      showToast(`Updated "${newProd.name}"`);
-    } else {
-      setCustomProducts((prev) => [newProd, ...prev]);
-      showToast(`Added "${newProd.name}" to store`);
-    }
-
-    setProductForm({
-      name: '',
-      category: 'Wall Decor',
-      price: 2999,
-      originalPrice: 3599,
-      badge: 'New Arrival',
-      stock: 'Ready to ship',
-      material: 'Brass / Wood',
-      dimensions: '12" x 12"',
-      care: 'Dust with soft dry cloth.',
-      story: '',
-      description: '',
-      image: ''
-    });
-    setEditingId('');
   };
 
   const applyPromo = () => {
@@ -362,12 +256,12 @@ function App() {
 
   return (
     <div className="site-wrapper">
-      {/* 1. Clean Top Announcement */}
+      {/* 1. Top Announcement */}
       <div className="top-strip">
         <span>Authentic Indian Heritage Handicrafts • Direct Workshop Pricing • Free Pan-India Insured Shipping</span>
       </div>
 
-      {/* 2. Professional Header */}
+      {/* 2. Header */}
       <header className="header">
         <div className="header-container">
           <a href="#top" className="logo">
@@ -393,9 +287,6 @@ function App() {
               <ShoppingBag size={18} />
               <span>{cartItemCount}</span>
             </button>
-            <button className="btn-admin-pill" onClick={() => setAdminModalOpen(true)}>
-              {isAdmin ? <><CheckCircle size={14} /> Owner Active</> : <><Lock size={14} /> Owner Login</>}
-            </button>
             <button className="btn-icon mobile-menu-toggle" aria-label="Menu" onClick={() => setNavOpen(!navOpen)}>
               {navOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -417,7 +308,7 @@ function App() {
         )}
       </header>
 
-      {/* 3. Refined Editorial Hero */}
+      {/* 3. Hero */}
       <section className="hero-section" id="top">
         <div className="hero-grid">
           <div className="hero-text-content">
@@ -485,7 +376,7 @@ function App() {
         </div>
       </section>
 
-      {/* 5. Main Clean Product Catalog */}
+      {/* 5. Product Catalog */}
       <section className="catalog-section" id="collection">
         <div className="section-head">
           <span className="section-eyebrow">curated catalog</span>
@@ -493,7 +384,6 @@ function App() {
           <p>Explore our full range of live-edge woodcrafts, antique brass relief art, and sacred sculptures.</p>
         </div>
 
-        {/* Filter & Sort Controls */}
         <div className="catalog-controls">
           <div className="category-pills">
             {categories.map((cat) => (
@@ -517,7 +407,6 @@ function App() {
           </div>
         </div>
 
-        {/* Product Cards Grid */}
         <div className="products-grid">
           {filteredProducts.map((product) => (
             <div className="card" key={product.id}>
@@ -606,7 +495,7 @@ function App() {
         </div>
       </section>
 
-      {/* 7. Custom Commissions & Inquiries */}
+      {/* 7. Custom Commissions */}
       <section className="custom-section" id="custom">
         <div className="custom-container">
           <div className="section-head">
@@ -917,162 +806,10 @@ function App() {
         </div>
       )}
 
-      {/* 11. Owner Admin Portal Modal */}
-      {adminModalOpen && (
-        <div className="modal-overlay" onClick={() => setAdminModalOpen(false)}>
-          <div className="admin-dialog" onClick={(e) => e.stopPropagation()}>
-            <button className="btn-icon modal-close" onClick={() => setAdminModalOpen(false)}><X size={18} /></button>
-
-            {!isAdmin ? (
-              <form className="admin-login-box" onSubmit={handleAdminLogin}>
-                <div className="admin-icon-center"><Lock size={32} /></div>
-                <h2>Owner Authentication</h2>
-                <p>Log in to manage product listings, pricing, and stock.</p>
-
-                <label>
-                  Owner Email
-                  <input
-                    type="email"
-                    required
-                    placeholder="owner@sainihandicrafts.com"
-                    value={adminEmail}
-                    onChange={(e) => setAdminEmail(e.target.value)}
-                  />
-                </label>
-                <label>
-                  Passcode
-                  <input
-                    type="password"
-                    required
-                    placeholder="Enter owner passcode"
-                    value={adminCode}
-                    onChange={(e) => setAdminCode(e.target.value)}
-                  />
-                </label>
-
-                <div className="admin-demo-creds">
-                  <span>Demo Email: <strong>{ADMIN_EMAIL}</strong></span>
-                  <span>Demo Passcode: <strong>{ADMIN_CODE}</strong></span>
-                </div>
-
-                {adminError && <p className="error-text">{adminError}</p>}
-
-                <button className="btn-primary full-width" type="submit">
-                  <LogIn size={16} /> Log In to Dashboard
-                </button>
-              </form>
-            ) : (
-              <div className="admin-dashboard-view">
-                <div className="admin-dash-head">
-                  <div>
-                    <span className="status-badge"><CheckCircle size={14} /> Logged in as Owner</span>
-                    <h3>Product Catalog Manager</h3>
-                  </div>
-                  <button className="btn-secondary btn-sm" onClick={handleAdminLogout}>
-                    <LogOut size={14} /> Logout
-                  </button>
-                </div>
-
-                <form className="admin-add-form" onSubmit={handleProductSubmit}>
-                  <h4>{editingId ? 'Edit Product Listing' : 'Add New Handcrafted Product'}</h4>
-                  <div className="form-two-col">
-                    <label>
-                      Title
-                      <input
-                        required
-                        placeholder="e.g. Vintage Brass Ganesh Mural"
-                        value={productForm.name}
-                        onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
-                      />
-                    </label>
-                    <label>
-                      Price (Rs.)
-                      <input
-                        type="number"
-                        required
-                        value={productForm.price}
-                        onChange={(e) => setProductForm({ ...productForm, price: e.target.value })}
-                      />
-                    </label>
-                  </div>
-
-                  <div className="form-two-col">
-                    <label>
-                      Category
-                      <select
-                        value={productForm.category}
-                        onChange={(e) => setProductForm({ ...productForm, category: e.target.value })}
-                      >
-                        <option>Wall Decor</option>
-                        <option>Woodcraft</option>
-                        <option>Sculptural Art</option>
-                      </select>
-                    </label>
-                    <label>
-                      Stock Status
-                      <select
-                        value={productForm.stock}
-                        onChange={(e) => setProductForm({ ...productForm, stock: e.target.value })}
-                      >
-                        <option>Ready to ship</option>
-                        <option>Made to order</option>
-                        <option>Only 2 left</option>
-                        <option>Limited Edition</option>
-                      </select>
-                    </label>
-                  </div>
-
-                  <label>
-                    Material & Dimensions
-                    <input
-                      placeholder="e.g. Solid Teak Wood • 14 x 10 inches"
-                      value={productForm.material}
-                      onChange={(e) => setProductForm({ ...productForm, material: e.target.value })}
-                    />
-                  </label>
-
-                  <label>
-                    Description & Craft Story
-                    <textarea
-                      rows={3}
-                      placeholder="Explain how this piece was crafted and its key features..."
-                      value={productForm.story}
-                      onChange={(e) => setProductForm({ ...productForm, story: e.target.value })}
-                    />
-                  </label>
-
-                  <button className="btn-primary" type="submit">
-                    <Save size={16} /> {editingId ? 'Update Product' : 'Publish Product to Store'}
-                  </button>
-                </form>
-
-                {customProducts.length > 0 && (
-                  <div className="admin-product-list">
-                    <h4>Owner Added Products ({customProducts.length})</h4>
-                    {customProducts.map((p) => (
-                      <div className="admin-prod-row" key={p.id}>
-                        <div>
-                          <strong>{p.name}</strong>
-                          <small>Rs. {p.price.toLocaleString('en-IN')} • {p.category}</small>
-                        </div>
-                        <div className="row-actions">
-                          <button onClick={() => { setEditingId(p.id); setProductForm(p); }}><Edit3 size={15} /></button>
-                          <button onClick={() => setCustomProducts((prev) => prev.filter((x) => x.id !== p.id))}><Trash2 size={15} /></button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* 12. Floating Toast */}
+      {/* 11. Floating Toast */}
       {toastMessage && <div className="site-toast">{toastMessage}</div>}
 
-      {/* 13. Clean Luxury Footer */}
+      {/* 12. Clean Luxury Footer */}
       <footer className="footer" id="contact">
         <div className="footer-grid">
           <div className="footer-col-main">
@@ -1094,7 +831,7 @@ function App() {
             <a href="#collection">Collection</a>
             <a href="#heritage">Craft Heritage</a>
             <a href="#custom">Custom Commissions</a>
-            <button className="link-button" onClick={() => setAdminModalOpen(true)}>Owner Portal</button>
+            <a href="#contact">Contact & Workshop</a>
           </div>
 
           <div className="footer-col">

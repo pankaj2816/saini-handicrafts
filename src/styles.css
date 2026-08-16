@@ -1237,8 +1237,8 @@ input:focus, select:focus, textarea:focus {
   gap: 10px;
 }
 
-/* 10. Checkout & Admin Dialogs */
-.checkout-dialog, .admin-dialog {
+/* 10. Checkout Dialog */
+.checkout-dialog {
   background: var(--bg-page);
   border-radius: var(--radius-lg);
   max-width: 580px;
@@ -1305,105 +1305,6 @@ input:focus, select:focus, textarea:focus {
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 10px;
-}
-
-/* 11. Admin Owner Portal */
-.admin-login-box {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.admin-icon-center {
-  text-align: center;
-  color: var(--accent-clay);
-}
-
-.admin-demo-creds {
-  background: rgba(196, 147, 63, 0.12);
-  border: 1px solid rgba(196, 147, 63, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 0.82rem;
-}
-
-.error-text {
-  color: #C92A2A;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.admin-dash-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border-light);
-  margin-bottom: 16px;
-}
-
-.status-badge {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--accent-moss);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.admin-add-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 18px;
-  margin-bottom: 18px;
-}
-
-.admin-product-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.admin-prod-row {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.admin-prod-row strong {
-  display: block;
-  font-size: 0.88rem;
-}
-
-.admin-prod-row small {
-  color: var(--ink-muted);
-  font-size: 0.78rem;
-}
-
-.row-actions {
-  display: flex;
-  gap: 6px;
-}
-
-.row-actions button {
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--border-light);
-  background: white;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
 }
 
 /* 12. Floating Toast */
