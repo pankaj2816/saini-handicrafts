@@ -3,22 +3,21 @@
    Clean, Fast, Minimalist, High-Conversion Styling System
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
-  --bg-page: #FAF7F2;
+  --bg-page: #F8F5EF;
   --bg-card: #FFFFFF;
-  --bg-subtle: #F3ECE1;
-  --bg-dark: #191E1C;
+  --bg-subtle: #EFE8DD;
+  --bg-dark: #302C25;
 
-  --ink-primary: #191E1C;
-  --ink-secondary: #47524D;
-  --ink-muted: #798681;
+  --ink-primary: #302C25;
+  --ink-secondary: #645E54;
+  --ink-muted: #746E64;
 
-  --accent-clay: #B45338;
+  --accent-clay: #A34F35;
   --accent-clay-hover: #9B3E25;
   --accent-gold: #C4933F;
   --accent-gold-soft: #FDF4E5;
