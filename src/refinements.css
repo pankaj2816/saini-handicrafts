@@ -241,6 +241,271 @@ main { min-width: 0; }
 .care-pillars-grid { gap: 14px; }
 .trade-benefits-strip strong { font-size: 12px; }
 .trade-benefits-strip span { font-size: 10px; }
+
+/* Folk Toys Showcase Section */
+.folk-toys-section {
+  padding: 60px 0 80px;
+  background: linear-gradient(180deg, rgba(244, 239, 232, 0.45) 0%, rgba(239, 233, 222, 0.75) 100%);
+  border-top: 1px solid #e5ded2;
+  border-bottom: 1px solid #e5ded2;
+  margin-bottom: 80px;
+}
+.folk-toys-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.folk-toys-showcase-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+.folk-toy-hero-card {
+  background: #ffffff;
+  border: 1px solid #e2dad0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(45, 34, 24, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+.folk-toy-hero-image {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #ede6dc;
+}
+.folk-toy-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.folk-toy-hero-card:hover .folk-toy-hero-image img {
+  transform: scale(1.03);
+}
+.folk-toy-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(28, 22, 17, 0.88);
+  backdrop-filter: blur(8px);
+  color: #f7f1ea;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+.folk-toy-hero-body {
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+.folk-toy-tag {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #a07830;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.folk-toy-hero-body h3 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: #241d17;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+.folk-toy-hero-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #63574c;
+  margin: 0 0 16px;
+}
+.folk-toy-specs-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.folk-toy-specs-pills span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #4a3e33;
+  background: rgba(184, 134, 11, 0.08);
+  padding: 6px 11px;
+  border-radius: 6px;
+  border: 1px solid rgba(184, 134, 11, 0.18);
+  font-weight: 500;
+}
+.folk-toy-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid #ede6dc;
+}
+.folk-toy-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.folk-toy-price strong {
+  font-size: 24px;
+  color: #241d17;
+}
+.folk-toy-btn-group {
+  display: flex;
+  gap: 8px;
+}
+.folk-toys-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.folk-toy-mini-card {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #e4ddd2;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(45, 34, 24, 0.03);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.folk-toy-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: #d1b88e;
+  box-shadow: 0 8px 24px rgba(45, 34, 24, 0.08);
+}
+.folk-toy-mini-thumb {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ece4d8;
+}
+.folk-toy-mini-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.folk-toy-mini-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.mini-toy-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a07830;
+  font-weight: 600;
+}
+.folk-toy-mini-info h4 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: #241d17;
+  margin: 3px 0 4px;
+}
+.folk-toy-mini-info p {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #63574c;
+  margin: 0 0 8px;
+}
+.mini-toy-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mini-toy-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.mini-toy-price strong {
+  font-size: 16px;
+  color: #241d17;
+}
+.mini-toy-buttons {
+  display: flex;
+  gap: 6px;
+}
+.btn-icon-subtle {
+  background: #f7f3ed;
+  border: 1px solid #dfd6c8;
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+  color: #4a3e33;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.btn-icon-subtle:hover {
+  background: #ece3d3;
+  border-color: #bfa882;
+}
+.btn-mini-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #241d17;
+  color: #f7f1ea;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-mini-add:hover {
+  background: #3d3228;
+}
+.folk-toys-provenance-banner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 36px;
+  padding: 22px 28px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #e4ddd2;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(45, 34, 24, 0.03);
+}
+.provenance-banner-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.provenance-banner-item svg {
+  color: #a07830;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.provenance-banner-item strong {
+  display: block;
+  font-size: 13px;
+  color: #241d17;
+  margin-bottom: 2px;
+}
+.provenance-banner-item span {
+  font-size: 11px;
+  color: #6d6154;
+  line-height: 1.4;
+}
+
 @media (min-width: 1500px) { .hero-section { padding-top: 65px; padding-bottom: 80px; } }
 @media (max-width: 1150px) {
   .header-container { padding: 20px 32px; gap: 24px; }
@@ -271,8 +536,9 @@ main { min-width: 0; }
   .hamper-grid { grid-template-columns: 1fr; gap: 35px; }
   .hamper-product-picker { grid-template-columns: repeat(4,minmax(0,1fr)); }
   .hamper-summary-card { position: static; }
-  .patron-spaces-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 35px; }
   .calculator-grid { gap: 28px; }
+  .folk-toys-showcase-grid { grid-template-columns: 1fr; gap: 28px; }
+  .folk-toys-provenance-banner { grid-template-columns: 1fr; gap: 16px; }
   .footer-grid { gap: 35px; }
 }
 @media (max-width: 760px) {
@@ -314,8 +580,11 @@ main { min-width: 0; }
   .hamper-summary-card { padding: 24px; }
   .heritage-section { padding: 48px 24px; margin-bottom: 60px; }
   .heritage-grid { grid-template-columns: 1fr; gap: 30px; }
-  .heritage-image-box { max-width: 450px; width: 100%; margin: auto; aspect-ratio: 1.1; }
   .calculator-grid { grid-template-columns: 1fr; }
+  .folk-toys-section { padding: 48px 0 60px; margin-bottom: 60px; }
+  .folk-toys-container { padding: 0 24px; }
+  .folk-toy-hero-body { padding: 20px; }
+  .folk-toy-hero-body h3 { font-size: 22px; }
   .footer { padding: 48px 24px 80px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-col-main { grid-column: 1 / -1; }
@@ -384,6 +653,10 @@ main { min-width: 0; }
   .patron-location-tag { font-size: 8px; padding: 4px 7px; }
   .patron-quote { font-size: 10px; }
   .btn-patron-view { font-size: 9px; }
+  .folk-toy-mini-card { grid-template-columns: 85px 1fr; gap: 12px; padding: 10px; }
+  .folk-toy-action-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .folk-toy-btn-group { width: 100%; }
+  .folk-toy-btn-group .btn-primary { flex: 1; }
   .footer-grid { gap: 28px 20px; }
   .footer .logo-title { max-width: none; font-size: 22px; }
   .footer .logo-sub { font-size: 7px; }

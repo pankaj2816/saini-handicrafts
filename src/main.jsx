@@ -202,10 +202,82 @@ const initialProducts = [
     care: 'Use indoor pot liner to prevent direct water-wood contact.',
     story: 'Handcrafted tricycle cart with geometric hexagonal wooden wheels, built to cradle small bonsai, succulents, or micro-greens for desks and shelves.',
     description: 'Artisan geometric wooden planter tricycle with dual hexagonal front wheels and natural wood finish.'
+  },
+  {
+    id: 'marwar-heritage-horse-toy',
+    name: 'Virasat Hand-Carved Wooden Toy Stallion',
+    category: 'Heritage Toys',
+    price: 1250,
+    originalPrice: 1600,
+    badge: 'Heritage Folk Toy',
+    batchEdition: 'Monsoon Series • #04 of 20',
+    provenance: 'Reclaimed Rajasthan Teak & Turned Hardwood Wheels',
+    maker: 'The Rajasthani Forge',
+    stock: '8 units ready',
+    image: assetPath('products/marwar-heritage-horse-toy.jpg'),
+    material: 'Solid Reclaimed Wood & Turned Axles',
+    dimensions: '8" x 6.5" x 2.5"',
+    care: 'Buff lightly with natural beeswax or linseed oil. Keep away from direct water immersion.',
+    story: 'Sculpted from a single seasoned hardwood timber blank, capturing the spirited posture of the desert Marwari horse. Equipped with hand-turned functional rolling wheels and smooth, beveled edges safe for gentle handling.',
+    description: 'Hand-carved wooden horse toy on smooth rolling wheels, finished with non-toxic natural beeswax luster.'
+  },
+  {
+    id: 'royal-gaja-elephant-toy',
+    name: 'Royal Gaja Hand-Carved Wooden Elephant',
+    category: 'Heritage Toys',
+    price: 1350,
+    originalPrice: 1750,
+    badge: 'Auspicious Keepsake',
+    batchEdition: 'Monsoon Series • #02 of 20',
+    provenance: 'Seasoned Hardwood with Upright Auspicious Trunk',
+    maker: 'The Rajasthani Forge',
+    stock: '6 units ready',
+    image: assetPath('products/royal-gaja-elephant-toy.jpg'),
+    material: 'Solid Seasoned Teak & Turned Wooden Wheels',
+    dimensions: '8.5" x 6" x 2.5"',
+    care: 'Keep away from moisture. Periodically buff with natural timber balm.',
+    story: 'Carved with the auspicious upright trunk symbolizing good fortune and abundance in traditional Rajasthani lore. Features smooth tactile curves, hand-turned wooden wheels with brass-accented caps, and rich natural woodgrain.',
+    description: 'Traditional Rajasthani wooden elephant figurine on rolling wooden wheels with hand-beveled contours.'
+  },
+  {
+    id: 'marwar-camel-cart-toy',
+    name: 'Marwar Caravan Wooden Camel & Hauler Cart',
+    category: 'Heritage Toys',
+    price: 1850,
+    originalPrice: 2350,
+    badge: 'Atelier Folk Craft',
+    batchEdition: 'Desert Series • #03 of 15',
+    provenance: 'Seasoned Rajasthan Hardwood & Joinery Cart',
+    maker: 'The Rajasthani Forge',
+    stock: '5 sets ready',
+    image: assetPath('products/marwar-camel-cart-toy.jpg'),
+    material: 'Solid Hardwood & Functional Joinery',
+    dimensions: '14" x 7" x 3.5"',
+    care: 'Dust with dry microfiber cloth. Avoid exposure to water.',
+    story: 'An homage to the desert caravans of Thar. Hand-sculpted Marwari camel hitched to an authentic two-wheeled timber hauler cart, each wheel independently turning on wooden axles.',
+    description: 'Artisan wooden camel hitched to an authentic rolling cart, carved in seasoned hardwood.'
+  },
+  {
+    id: 'hansa-heritage-swan-toy',
+    name: 'Hansa Handcrafted Wooden Water Bird',
+    category: 'Heritage Toys',
+    price: 1150,
+    originalPrice: 1450,
+    badge: 'Workshop Edition',
+    batchEdition: 'Atelier Series • #01 of 12',
+    provenance: 'Raw seasoned timber slab, chiseled by hand in Rajasthan',
+    maker: 'The Rajasthani Forge',
+    stock: '4 units ready',
+    image: assetPath('products/hansa-heritage-swan-toy.jpg'),
+    material: 'Seasoned Natural Hardwood',
+    dimensions: '7.5" x 6" x 2.2"',
+    care: 'Dust with dry cotton. Polish with natural vegetable oil.',
+    story: 'Crafted with graceful arched neck curves and wheel pivots, drawing upon century-old village folk-toy forms representing sacred swans and lake avians.',
+    description: 'Hand-carved wooden swan push-toy on functional wheels, celebrating rural folk toy traditions.'
   }
 ];
 
-const categories = ['All', 'Wall Decor', 'Woodcraft', 'Sculptural Art'];
+const categories = ['All', 'Wall Decor', 'Woodcraft', 'Heritage Toys', 'Sculptural Art'];
 
 // Currency Multipliers
 const currencies = {
@@ -512,7 +584,10 @@ function App() {
 
   const filteredProducts = useMemo(() => {
     let result = allProducts.filter((item) => {
-      const matchCat = activeCategory === 'All' || item.category === activeCategory;
+      const matchCat =
+        activeCategory === 'All' ||
+        item.category === activeCategory ||
+        (activeCategory === 'Woodcraft' && item.category === 'Heritage Toys');
       const q = searchTerm.trim().toLowerCase();
       const matchSearch = !q || [item.name, item.category, item.description, item.material, item.badge]
         .some((val) => String(val || '').toLowerCase().includes(q));
@@ -752,6 +827,7 @@ function App() {
 
           <nav id="primary-navigation" aria-label="Main navigation" className={`nav-menu ${navOpen ? 'open' : ''}`}>
             <a href="#collection" onClick={() => setNavOpen(false)}>Collection</a>
+            <a href="#folk-toys" onClick={() => setNavOpen(false)}>Heritage Toys</a>
             <a href="#hampers" onClick={() => setNavOpen(false)}>Gift Hampers</a>
             <a href="#patron-spaces" onClick={() => setNavOpen(false)}>Styling ideas</a>
             <a href="#heritage" onClick={() => setNavOpen(false)}>Heritage</a>
@@ -934,6 +1010,165 @@ function App() {
             </button>
           </div>
         )}
+      </section>
+
+      {/* 5B. Virasat Heirloom Wooden Folk Toys Showcase */}
+      <section className="folk-toys-section" id="folk-toys">
+        <div className="folk-toys-container">
+          <div className="section-head">
+            <span className="section-eyebrow"><Sparkles size={14} /> HEIRLOOM WOODCRAFT • VIRASAT COLLECTION</span>
+            <h2>Hand-Carved Folk Toys on Wheels.</h2>
+            <p>
+              Born from reclaimed timber blocks in our Rajasthan workshop. Hand-chiseled animal silhouettes with rolling wheels and organic beeswax sheen, crafted as timeless keepsakes for curious hands and modern decor shelves.
+            </p>
+          </div>
+
+          <div className="folk-toys-showcase-grid">
+            <div className="folk-toy-hero-card">
+              <div className="folk-toy-hero-image">
+                <img
+                  loading="lazy"
+                  src={assetPath('products/marwar-heritage-horse-toy.jpg')}
+                  alt="Virasat Hand-Carved Wooden Toy Stallion"
+                />
+                <span className="folk-toy-badge">Signature Atelier Piece</span>
+              </div>
+              <div className="folk-toy-hero-body">
+                <span className="folk-toy-tag">Desert Marwari Stallion</span>
+                <h3>Virasat Hand-Carved Wooden Toy Stallion</h3>
+                <p>
+                  Sculpted from seasoned timber with traditional chisels, contoured with arched crest curves and mounted on smooth wooden wheels with solid brass axle caps. Sealed with warm organic oils to honor natural knots and timber grains.
+                </p>
+                <div className="folk-toy-specs-pills">
+                  <span><ShieldCheck size={13} /> 100% Non-Toxic Finish</span>
+                  <span><Clock size={13} /> Functional Rolling Wheels</span>
+                  <span><Award size={13} /> Solid Reclaimed Teak</span>
+                </div>
+                <div className="folk-toy-action-row">
+                  <div className="folk-toy-price">
+                    <strong>{formatPrice(1250)}</strong>
+                    <span className="old-price">{formatPrice(1600)}</span>
+                  </div>
+                  <div className="folk-toy-btn-group">
+                    <button
+                      className="btn-primary"
+                      onClick={() => {
+                        const horse = productMap['marwar-heritage-horse-toy'];
+                        if (horse) addToCart(horse);
+                      }}
+                    >
+                      <ShoppingBag size={16} /> Add to Basket
+                    </button>
+                    <button
+                      className="btn-secondary"
+                      onClick={() => {
+                        const horse = productMap['marwar-heritage-horse-toy'];
+                        if (horse) openProductModal(horse, 'details');
+                      }}
+                    >
+                      <Eye size={16} /> Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="folk-toys-cards-list">
+              {[
+                {
+                  id: 'royal-gaja-elephant-toy',
+                  name: 'Royal Gaja Wooden Elephant',
+                  subtitle: 'Auspicious Upright Trunk',
+                  price: 1350,
+                  oldPrice: 1750,
+                  image: assetPath('products/royal-gaja-elephant-toy.jpg'),
+                  desc: 'Symbolizing strength and abundance, hand-carved with smooth rolling wheels and soft tactile contours.'
+                },
+                {
+                  id: 'marwar-camel-cart-toy',
+                  name: 'Marwar Caravan Camel & Cart',
+                  subtitle: 'Traditional 2-Piece Joinery Set',
+                  price: 1850,
+                  oldPrice: 2350,
+                  image: assetPath('products/marwar-camel-cart-toy.jpg'),
+                  desc: 'Hand-sculpted desert camel hitched to an authentic rolling wooden hauler cart with turning axles.'
+                },
+                {
+                  id: 'hansa-heritage-swan-toy',
+                  name: 'Hansa Wooden Water Bird',
+                  subtitle: 'Graceful Arched Silhouette',
+                  price: 1150,
+                  oldPrice: 1450,
+                  image: assetPath('products/hansa-heritage-swan-toy.jpg'),
+                  desc: 'Arched neck profile on rolling wheels, celebrating indigenous folk bird motifs of Mewar.'
+                }
+              ].map((toy) => (
+                <div className="folk-toy-mini-card" key={toy.id}>
+                  <div className="folk-toy-mini-thumb">
+                    <img loading="lazy" src={toy.image} alt={toy.name} />
+                  </div>
+                  <div className="folk-toy-mini-info">
+                    <span className="mini-toy-tag">{toy.subtitle}</span>
+                    <h4>{toy.name}</h4>
+                    <p>{toy.desc}</p>
+                    <div className="mini-toy-foot">
+                      <div className="mini-toy-price">
+                        <strong>{formatPrice(toy.price)}</strong>
+                        <span className="old-price">{formatPrice(toy.oldPrice)}</span>
+                      </div>
+                      <div className="mini-toy-buttons">
+                        <button
+                          className="btn-icon-subtle"
+                          title="View Details"
+                          aria-label={`View ${toy.name}`}
+                          onClick={() => {
+                            const p = productMap[toy.id];
+                            if (p) openProductModal(p, 'details');
+                          }}
+                        >
+                          <Eye size={15} />
+                        </button>
+                        <button
+                          className="btn-mini-add"
+                          onClick={() => {
+                            const p = productMap[toy.id];
+                            if (p) addToCart(p);
+                          }}
+                        >
+                          <ShoppingBag size={14} /> Add
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="folk-toys-provenance-banner">
+            <div className="provenance-banner-item">
+              <Award size={20} />
+              <div>
+                <strong>Heritage Woodcraft Lineage</strong>
+                <span>Direct from Rajasthan artisans using generational chiseling methods</span>
+              </div>
+            </div>
+            <div className="provenance-banner-item">
+              <ShieldCheck size={20} />
+              <div>
+                <strong>Safe & Organic</strong>
+                <span>Pure beeswax and cold-pressed plant oil finish, free of synthetic chemical paints</span>
+              </div>
+            </div>
+            <div className="provenance-banner-item">
+              <Gift size={20} />
+              <div>
+                <strong>Heirloom Gifting Ready</strong>
+                <span>Available individually or packaged inside our brass-inscribed gift hampers</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 6. Bespoke Gift Hamper & Wedding Favor Builder */}
