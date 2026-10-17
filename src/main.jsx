@@ -1030,14 +1030,14 @@ function App() {
         )}
       </section>
 
-      {/* 5B. Virasat Heirloom Wooden Folk Toys Showcase */}
+      {/* 5B. Virasat Heirloom Wooden Folk Toys Showcase — The Luxury Trilogy */}
       <section className="folk-toys-section" id="folk-toys">
         <div className="folk-toys-container">
           <div className="section-head">
-            <span className="section-eyebrow"><Sparkles size={14} /> HEIRLOOM WOODCRAFT • VIRASAT COLLECTION</span>
-            <h2>Hand-Carved Folk Toys on Wheels.</h2>
+            <span className="section-eyebrow"><Sparkles size={14} /> HEIRLOOM WOODCRAFT • THE VIRASAT TRILOGY</span>
+            <h2>The Virasat Heirloom Wooden Trilogy on Wheels.</h2>
             <p>
-              Born from reclaimed timber blocks in our Rajasthan workshop. Hand-chiseled animal silhouettes with rolling wheels and organic beeswax sheen, crafted as timeless keepsakes for curious hands and modern decor shelves.
+              Hand-chiseled from single blocks of seasoned Rajasthan teak, finished with organic beeswax and fitted with solid brass-capped axles. Each piece is an authentic folk keepsake made to be treasured for generations.
             </p>
           </div>
 
@@ -1049,7 +1049,7 @@ function App() {
                   src={assetPath('products/marwar-heritage-horse-toy.jpg')}
                   alt="Virasat Hand-Carved Wooden Toy Stallion"
                 />
-                <span className="folk-toy-badge">Signature Atelier Piece</span>
+                <span className="folk-toy-badge">Trilogy Edition • 01</span>
               </div>
               <div className="folk-toy-hero-body">
                 <span className="folk-toy-tag">Desert Marwari Stallion</span>
@@ -1095,6 +1095,7 @@ function App() {
               {[
                 {
                   id: 'royal-gaja-elephant-toy',
+                  num: '02',
                   name: 'Royal Gaja Wooden Elephant',
                   subtitle: 'Auspicious Upright Trunk',
                   price: 1350,
@@ -1104,35 +1105,19 @@ function App() {
                 },
                 {
                   id: 'marwar-camel-cart-toy',
+                  num: '03',
                   name: 'Marwar Caravan Camel & Cart',
                   subtitle: 'Traditional 2-Piece Joinery Set',
                   price: 1850,
                   oldPrice: 2350,
                   image: assetPath('products/marwar-camel-cart-toy.jpg'),
                   desc: 'Hand-sculpted desert camel hitched to an authentic rolling wooden hauler cart with turning axles.'
-                },
-                {
-                  id: 'bhadra-tusker-elephant-toy',
-                  name: 'Bhadra Carved Tusker Elephant',
-                  subtitle: 'Curved Trunk & Carved Tusks',
-                  price: 1350,
-                  oldPrice: 1750,
-                  image: assetPath('products/bhadra-tusker-elephant-toy.jpg'),
-                  desc: 'Chiseled royal tusker silhouette with distinguished carved tusk details and rolling wheels.'
-                },
-                {
-                  id: 'hansa-heritage-swan-toy',
-                  name: 'Hansa Wooden Water Bird',
-                  subtitle: 'Graceful Arched Silhouette',
-                  price: 1150,
-                  oldPrice: 1450,
-                  image: assetPath('products/hansa-heritage-swan-toy.jpg'),
-                  desc: 'Arched neck profile on rolling wheels, celebrating indigenous folk bird motifs of Mewar.'
                 }
               ].map((toy) => (
                 <div className="folk-toy-mini-card" key={toy.id}>
                   <div className="folk-toy-mini-thumb">
                     <img loading="lazy" src={toy.image} alt={toy.name} />
+                    <span className="mini-card-pill">Trilogy • {toy.num}</span>
                   </div>
                   <div className="folk-toy-mini-info">
                     <span className="mini-toy-tag">{toy.subtitle}</span>
@@ -1165,6 +1150,56 @@ function App() {
                           <ShoppingBag size={14} /> Add
                         </button>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Workshop Bench In-Progress Strip */}
+          <div className="workshop-preview-strip">
+            <div className="workshop-preview-header">
+              <span className="section-eyebrow"><Wrench size={14} /> ATELIER BENCH • IN CHISELING</span>
+              <h3>Upcoming Workshop Editions</h3>
+              <p>Fresh from the carpenter bench in Rajasthan — currently undergoing hand-carving and organic oil conditioning.</p>
+            </div>
+            <div className="workshop-preview-grid">
+              {[
+                {
+                  id: 'bhadra-tusker-elephant-toy',
+                  name: 'Bhadra Heritage Tusker Elephant',
+                  stage: 'Hand-chiseled tusks & axle assembly',
+                  image: assetPath('products/bhadra-tusker-elephant-toy.jpg'),
+                  price: 1350
+                },
+                {
+                  id: 'hansa-heritage-swan-toy',
+                  name: 'Hansa Handcrafted Water Bird',
+                  stage: 'Arched neck sanding & beeswax buffing',
+                  image: assetPath('products/hansa-heritage-swan-toy.jpg'),
+                  price: 1150
+                }
+              ].map((item) => (
+                <div className="workshop-preview-item" key={item.id}>
+                  <div className="workshop-preview-thumb">
+                    <img loading="lazy" src={item.image} alt={item.name} />
+                    <span className="workshop-badge">Workbench Preview</span>
+                  </div>
+                  <div className="workshop-preview-meta">
+                    <h4>{item.name}</h4>
+                    <span className="workshop-stage-text">{item.stage}</span>
+                    <div className="workshop-preview-action">
+                      <strong>{formatPrice(item.price)}</strong>
+                      <button
+                        className="btn-workshop-reserve"
+                        onClick={() => {
+                          const p = productMap[item.id];
+                          if (p) openProductModal(p, 'details');
+                        }}
+                      >
+                        <Eye size={13} /> View Preview
+                      </button>
                     </div>
                   </div>
                 </div>
