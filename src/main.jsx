@@ -274,6 +274,24 @@ const initialProducts = [
     care: 'Dust with dry cotton. Polish with natural vegetable oil.',
     story: 'Crafted with graceful arched neck curves and wheel pivots, drawing upon century-old village folk-toy forms representing sacred swans and lake avians.',
     description: 'Hand-carved wooden swan push-toy on functional wheels, celebrating rural folk toy traditions.'
+  },
+  {
+    id: 'bhadra-tusker-elephant-toy',
+    name: 'Bhadra Heritage Carved Tusker Elephant',
+    category: 'Heritage Toys',
+    price: 1350,
+    originalPrice: 1750,
+    badge: 'Royal Tusker',
+    batchEdition: 'Folk Carving • #03 of 18',
+    provenance: 'Seasoned Rajasthan Hardwood with Carved Tusks',
+    maker: 'The Rajasthani Forge',
+    stock: '5 units ready',
+    image: assetPath('products/bhadra-tusker-elephant-toy.jpg'),
+    material: 'Solid Seasoned Hardwood & Turned Axles',
+    dimensions: '8" x 6" x 2.5"',
+    care: 'Dust with soft dry cotton. Periodically apply a drop of coconut or almond oil.',
+    story: 'Chiseled with authentic profile contours and distinguished tusk cutaways, honoring traditional royal procession tuskers of Rajasthan with smooth rolling wooden wheels.',
+    description: 'Authentic hand-carved wooden tusker elephant on functional wheels, finished with natural beeswax sheen.'
   }
 ];
 
@@ -1092,6 +1110,15 @@ function App() {
                   oldPrice: 2350,
                   image: assetPath('products/marwar-camel-cart-toy.jpg'),
                   desc: 'Hand-sculpted desert camel hitched to an authentic rolling wooden hauler cart with turning axles.'
+                },
+                {
+                  id: 'bhadra-tusker-elephant-toy',
+                  name: 'Bhadra Carved Tusker Elephant',
+                  subtitle: 'Curved Trunk & Carved Tusks',
+                  price: 1350,
+                  oldPrice: 1750,
+                  image: assetPath('products/bhadra-tusker-elephant-toy.jpg'),
+                  desc: 'Chiseled royal tusker silhouette with distinguished carved tusk details and rolling wheels.'
                 },
                 {
                   id: 'hansa-heritage-swan-toy',
